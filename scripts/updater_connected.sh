@@ -17,6 +17,6 @@ if git fetch origin main --progress 2>&1 | grep -q "Enumerating"; then
   chmod -R 777 $HOME/AeroLinux22/tools
   chmod -R 777 $HOME/AeroLinux22/source
   chmod -R 777 $HOME/AeroLinux22/bin
-  chown -R ${USER}:${USER} $HOME/AeroLinux22/
+  chown -R ${LOGNAME}:${LOGNAME} $HOME/AeroLinux22/
   sudo reboot 
 fi
