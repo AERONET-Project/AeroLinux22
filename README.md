@@ -49,16 +49,16 @@ Then install git,
 
 To get your project up and running please clone the latest version of the software,
 ```bash
-  sudo git clone https://github.com/AERONET-Project/AeroLinux.git
+  sudo git clone https://github.com/AERONET-Project/AeroLinux22.git
 ```
 
 
 Run the installation script:
 ```bash
-  cd aerolinux && sudo chmod 755 installer.sh
+  cd AeroLinux22 && sudo chmod 755 installer22.sh
 ```
 ```bash
-  sudo ./installer.sh
+  sudo ./installer22.sh
 ```
 
 Please reboot the system to hard reload daemons and kernel changes.
