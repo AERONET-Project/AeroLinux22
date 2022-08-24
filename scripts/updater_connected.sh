@@ -10,7 +10,6 @@ if git fetch origin main --progress 2>&1 | grep -q "Enumerating"; then
   echo "======================="
   sleep 3
   
-  sleep 4
  
   echo "Setting permissions"
   chmod -R 777 $HOME/AeroLinux22/
