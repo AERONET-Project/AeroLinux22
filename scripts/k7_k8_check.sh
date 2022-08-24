@@ -6,14 +6,16 @@ file2=$HOME/last_time.k8
 if [ -f $file1 ] || [ -f $file2 ]
 then
 	echo "A file exists"
+	#check the files are not older than 2 days since writing, then it will reboot every two days until the file date is updated
 else
 	echo "No last_time file detected at ${date}" >> $HOME/logs/connection.log
+	#assume this is a fresh installation
 	exit 0
 fi
 
 if [ -f $file1 ] && [ -f $file2 ]
 then
-	echo 'Both files exist'
+	echo 'Both files exist and check the newest file'
 	if [ ${file1} -ot ${file2} ] #compare time of creation (older than)
 	then
 		echo 'k8 file is newer using that to compare'
