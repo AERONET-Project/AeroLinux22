@@ -33,10 +33,15 @@ if [[ $> 0 ]]
 then
 	echo "SDK failed installation, re-running"
 	curl -L hologram.io/python-install | bash
+	if [[ $> 0 ]]
+	then
+		echo "SDK failed installation, exiting"
+		exit 1
+	fi
 else
 	echo "Sucessfully installed Hologram SDK"
 fi
-curl -L hologram.io/python-install | bash
+
 
 getent group sudo | grep -q "$user_var"
 if [ $? -eq 0 ]; then
