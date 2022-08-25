@@ -95,6 +95,8 @@ int main(int argc, char **argv)
     if (receive_aeronet_time(&aerex, NULL))
     {
 
+        perform_update_routine (aerex.aeronet_time);
+        
         kurka = heartbeat_buffer;
 
 
