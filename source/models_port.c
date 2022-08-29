@@ -716,7 +716,7 @@ void find_and_upload_backup_files(int day_now, char *backup_dir, char *log_file)
                 else
                     read_time = T_read_k8_buffer_from_disk(backup_dir, &cimel_buffer);
 
-                if (read_time)
+                if (read_time || cimel_buffer.if_header)
                 {
                     libcurl_upload_cimel_buffer_to_https(&cimel_buffer, log_file, 1);
                     free_cimel_buffer(&cimel_buffer);
@@ -1409,7 +1409,9 @@ time_t T_read_k8_buffer_from_disk(char *dir_name, CIMEL_BUFFER *ptr)
     }
 
     free(buffer);
-
+    if (!ptr->num_records)
+        return 0;
+    
     return ptr->records->record_time;
 }
 
