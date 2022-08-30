@@ -32,7 +32,7 @@ Common variables
     MY_COM_PORT mcport;
     char usb_port[100], usb_reset_command[300];
     int cimel_model, retval, dev_init_5, dev_init_T, read_port, if_local = 1, iarg, reset_counter = 0; // if_local, 1 : do not operate hologram modem, 0 - operate it.
-    char backup_dir[500], *homedir = getenv("HOME"), log_dir[200], log_file[200], message_text[1000],
+    char backup_dir[500], *homedir = getenv("HOME"), log_dir[200], log_file[200], message_text[1000], log_file2[200],
                           *username = getenv("LOGNAME");
     char file_nameh[400], file_named[400], file_namem[400];
 
@@ -46,7 +46,7 @@ V5 variables
 */
     CIMEL_BUFFER k7b, k7bm, k7bh, k7bd;
     struct tm mtim;
-    time_t pc_time, new_time, stop_time, log_day, log_day1, pc_time1;
+    time_t pc_time, new_time, stop_time, log_day, log_day1, log_day2, pc_time1, pc_time2;
     time_t last_time_5;
     AERO_EXCHANGE aerex;
     /*
@@ -98,13 +98,13 @@ Step 0.  decide if local
 
     init_upload = 1;
 
-    for (log_day1 = log_day - 1; log_day1 > log_day - 10; log_day1--)
+    for (log_day2 = log_day - 1; log_day2 > log_day - 10; log_day2--)
     {
-        pc_time1 = log_day1 * 86400;
-        gmtime_r(&pc_time1, &mtim);
-        sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
+        pc_time2 = log_day2 * 86400;
+        gmtime_r(&pc_time2, &mtim);
+        sprintf(log_file2, "%s/connection_log_%d_%02d_%02d.txt",
                 log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
-        if (!stat(log_file, &bufff))
+        if (!stat(log_file2, &bufff))
         {
             if (!if_local && init_upload)
             {
@@ -114,7 +114,7 @@ Step 0.  decide if local
                     exit(0);
             }
 
-            upload_daily_connection_log_to_ftp(log_file, username);
+            upload_daily_connection_log_to_ftp(log_file2, username);
         }
     }
 
