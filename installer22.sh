@@ -18,7 +18,9 @@ timedatectl set-timezone Etc/UTC
 sleep 1
 
 echo "installing pre-reqs" 
-apt-get install -y libcurl4-openssl-dev ip pppd
+apt-get install -y libcurl4-openssl-dev 
+apt install -y ip 
+apt install -y pppd
 if [[ $> 0 ]]
 then
 	echo "libcurl and recs failed to install, exiting."
