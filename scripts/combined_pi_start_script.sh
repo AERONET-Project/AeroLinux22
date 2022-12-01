@@ -15,9 +15,9 @@ if [ -z "$modem_check" ]; then #Checks if modem_check is 0/empty - i.e., no mode
 
 else #Sees that modem_check has value and proceeds as modem is connected
         echo "A USB modem is connected" >> $HOME/logs/modem_diagnostics.log
-        sudo hologram network connect  >> $HOME/logs/modem_diagnostics.log
+        sudo pon hologram  >> $HOME/logs/modem_diagnostics.log
         $HOME/AeroLinux22/bin/pi_ftp_upload  >> $HOME/logs/modem_diagnostics.log
-        sudo hologram network disconnect  >> $HOME/logs/modem_diagnostics.log
+        sudo poff hologram  >> $HOME/logs/modem_diagnostics.log
 fi
 
 sleep 180

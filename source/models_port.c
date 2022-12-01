@@ -155,7 +155,7 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     char buffer[101], message_text[300];
     output_message_to_log(log_file, "Will activate modem\n");
     pc_time = time(NULL);
-    rd = popen("sudo hologram network connect 2>&1", "r"); // redirect error output to stdout
+    rd = popen("sudo pon hologram 2>&1", "r"); // redirect error output to stdout
 
     if (rd == NULL)
     {
@@ -179,7 +179,7 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     system(usb_reset_command);
     *reset_counter = *reset_counter + 1;
 
-    rd = popen("sudo hologram network connect 2>&1", "r"); // redirect error output to stdout
+    rd = popen("sudo pon hologram 2>&1", "r"); // redirect error output to stdout
 
     if (rd == NULL)
     {
