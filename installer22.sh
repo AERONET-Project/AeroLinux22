@@ -17,29 +17,13 @@ echo "Setting system's timezone to UTC."
 timedatectl set-timezone Etc/UTC
 sleep 1
 
-
-apt-get install -y libcurl4-openssl-dev
+echo "installing pre-reqs" 
+apt-get install -y libcurl4-openssl-dev ip pppd
 if [[ $> 0 ]]
 then
-	echo "libcurl failed to install, exiting."
+	echo "libcurl and recs failed to install, exiting."
 else
-	echo "libcurl is installed, continuing with script."
-fi
-
-echo "Downloading Hologram SDK..."
-curl -L hologram.io/python-install | bash
-
-if [[ $> 0 ]]
-then
-	echo "SDK failed installation, re-running"
-	curl -L hologram.io/python-install | bash
-	if [[ $> 0 ]]
-	then
-		echo "SDK failed installation, exiting"
-		exit 1
-	fi
-else
-	echo "Sucessfully installed Hologram SDK"
+	echo "Dependencies are installed, continuing with script."
 fi
 
 
@@ -51,9 +35,14 @@ else
 	exit 1
 fi
 
-
-
 echo "$user_var	ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+
+echo "De-yeeting Hologram SDK..."
+mv Hologram /etc/ppp/peers
+mv Nova-M /etc/chatscripts 
+echo "moved peer def and chatscript to ppp directory" 
+
 echo "Adding cronjobs to user's crontab"
 
 crontab -r
