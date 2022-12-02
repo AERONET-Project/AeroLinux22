@@ -44,6 +44,9 @@ echo "De-yeeting Hologram SDK..."
 mv Hologram /etc/ppp/peers
 mv Nova-M /etc/chatscripts 
 echo "moved peer def and chatscript to ppp directory" 
+systemctl disable ModemManager.service
+echo "pest control completed; removed ModemManager" 
+
 
 echo "Adding cronjobs to user's crontab"
 
