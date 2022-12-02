@@ -19,8 +19,8 @@ sleep 1
 
 echo "installing pre-reqs" 
 apt-get install -y libcurl4-openssl-dev 
-apt install -y ip 
-apt install -y pppd
+#apt install -y ip 
+#apt install -y pppd
 if [[ $> 0 ]]
 then
 	echo "libcurl and recs failed to install, exiting."
@@ -41,7 +41,7 @@ echo "$user_var	ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 
 echo "De-yeeting Hologram SDK..."
-mv Hologram /etc/ppp/peers
+mv hologram /etc/ppp/peers
 mv Nova-M /etc/chatscripts 
 echo "moved peer def and chatscript to ppp directory" 
 systemctl disable ModemManager.service
