@@ -1,11 +1,21 @@
 <img align="right" width="100" height="100" src="https://www.x20.org/wp-content/uploads/2015/01/NASA-logo.png"><br/>
 
-# AeroLinux Gen 2
+# AeroLinux Gen 2 Developmental branch
 
 This software package enables Linux devices to transfer data from Cimel sun photometers via Ethernet, Wi-Fi or a Hologram Nova cellular modem.
 #### Version 1.1.1 ####
  * On boot, sends a network settings message to our server via FTP
  * Watch runs on a 26 hour basis now
+#### Bug/ Issues/ To-Do List (Bugs Bolded)
+ *  **0Byte sessions of 12 hour, likely narrowed down to issues with completing handshake with tower based on "stale" information in modem, needs a reset and reassociate 
+ *  **PPP DNS failures on clean image build using Hologram chatscripts (Yet indeterminate) 
+ *  Switching the modem status check to actually read the modem state back over serial and then determine actions, culminating in obsoleting of the 
+ *  Power loss causes corruption of SD card, need to implement graceful shutdown and power watchdog to reset pi on power return unless pi asserting boot 
+ *  Design and build of a supercapacitor based UPS to carry over operation long enough to graceful shutdown 
+ *  Button for end location user to be able to gracefully shut down the pi, LED embedded to show when clear to unplug when lit. 
+ *  Battery voltage monitoring of solar panel output including logging with graceful shutdown if voltage drops out. 
+ *  Implement a modeswitch of Modem to power saving mode when not in use to reduce current draw of radio that can drain battery. 
+ *  Design monolithic carrier board for pi as a cover till we can get ANTs coming in the pipe. 
 
 ## Appendix
 
@@ -24,6 +34,8 @@ The software provides fully autonomous data transfer, data uploading and data st
 
 The recommended set up is a Raspberry Pi Zero W 1.7 running Rasbian OS.
 However, this software is lightweight and adaptable to other versions of Linux. A Debian version is strongly recommended.
+
+***NOTE: USB-SERIAL ADAPTER IS HARCODED TO REQUIRE FTDI, AVOID PROLIFIC BASED ADAPTERS AS THEY ARE A POINT OF MANY FAILURES
 
 
 Simply run the installation script and your system will be configured to run.
@@ -47,15 +59,14 @@ Then install git,
   sudo apt install git -y
 ```
 
-To get your project up and running please clone the latest version of the software,
+To get your project up and running please clone the latest Dev version of the software,
 ```bash
-  sudo git clone https://github.com/AERONET-Project/AeroLinux22.git
+  sudo git clone -b Development https://github.com/AERONET-Project/AeroLinux22.git
 ```
-
 
 Run the installation script:
 ```bash
-  cd AeroLinux22 && sudo chmod 755 installer22.sh
+  cd AeroLinux22; sudo chmod +x installer22.sh
 ```
 ```bash
   sudo ./installer22.sh
