@@ -6,10 +6,10 @@ This software package enables Linux devices to transfer data from Cimel sun phot
 #### Version 1.1.1 ####
  * On boot, sends a network settings message to our server via FTP
  * Watch runs on a 26 hour basis now
-#### Bug/ Issues/ To-Do List (Bugs Bolded)
- *  **0Byte sessions of 12 hour, likely narrowed down to issues with completing handshake with tower based on "stale" information in modem, needs a reset and reassociate 
- *  **PPP DNS failures on clean image build using Hologram chatscripts (Yet indeterminate) 
- *  Switching the modem status check to actually read the modem state back over serial and then determine actions, culminating in obsoleting of the 
+#### Bug/ Issues/ To-Do List (Bugs Bolded and Italic)
+ *  ***0Byte sessions of 12 hour, likely narrowed down to issues with completing handshake with tower based on "stale" information in modem, needs a reset and reassociate***
+ *  ***PPP DNS failures on clean image build using Hologram chatscripts (Yet indeterminate)***
+ *  Switching the modem status check to actually read the modem state back over serial and then determine actions, culminating in obsoleting of the USB subsystem reset and driver unbind reset mode (does not appear to work). 
  *  Power loss causes corruption of SD card, need to implement graceful shutdown and power watchdog to reset pi on power return unless pi asserting boot 
  *  Design and build of a supercapacitor based UPS to carry over operation long enough to graceful shutdown 
  *  Button for end location user to be able to gracefully shut down the pi, LED embedded to show when clear to unplug when lit. 
@@ -35,7 +35,7 @@ The software provides fully autonomous data transfer, data uploading and data st
 The recommended set up is a Raspberry Pi Zero W 1.7 running Rasbian OS.
 However, this software is lightweight and adaptable to other versions of Linux. A Debian version is strongly recommended.
 
-***NOTE: USB-SERIAL ADAPTER IS HARCODED TO REQUIRE FTDI, AVOID PROLIFIC BASED ADAPTERS AS THEY ARE A POINT OF MANY FAILURES
+***NOTE: USB-SERIAL ADAPTER IS HARCODED TO REQUIRE FTDI, AVOID PROLIFIC BASED ADAPTERS AS THEY ARE A POINT OF MANY FAILURES***
 
 
 Simply run the installation script and your system will be configured to run.
