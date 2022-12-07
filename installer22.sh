@@ -19,6 +19,7 @@ sleep 1
 
 echo "installing pre-reqs" 
 apt-get install -y libcurl4-openssl-dev 
+apt-get install -y chrony
 #apt install -y ip 
 #apt install -y pppd
 if [[ $> 0 ]]
@@ -46,6 +47,9 @@ mv Nova-M /etc/chatscripts
 echo "moved peer def and chatscript to ppp directory" 
 systemctl disable ModemManager.service
 echo "pest control completed; removed ModemManager" 
+
+echo "Setting NTP" using chrony 
+chronyc makestep 
 
 
 echo "Adding cronjobs to user's crontab"
@@ -86,3 +90,4 @@ sleep 2
 echo "==========================="
 echo "Build complete"
 echo "Please execute a reboot to hard reload daemons and kernel changes"
+sudo reboot 
