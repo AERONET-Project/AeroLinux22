@@ -23,22 +23,15 @@ fi
 prodid=$(lsusb | awk '$7=="Terminus"{print $6}' | cut -b 1-4) #get product id string
 vendid=$(lsusb | awk '$7=="Terminus"{print $6}' | cut -b 6-9) #get vendor id string
 
-#1
-sudo bash -c "echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/unbind"
-sleep 15
-sudo bash -c "echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/bind"
-#bus should always be 1 since the pi has one root hub (host controller)
-#the branched devices are given by which this controller controls, first,1, should be hub.
-sleep 20
+# Reset hologram modem via command to SOC inside instead of rebinding  
+sudo poff -a 
+#Free up USB port for AT command and kill PPPD session 
+sudo echo -n -e "AT+CFUN=1,1 \r\n" > /dev/ttyUSB2
+#ACTUAL RESET HAPPENS (May require recoding of port number)
+sleep 30
+#Wait for modem to wake back up 
 
-#2
-sudo usb_modeswitch -v 0x$prodid -p 0x$vendid --reset-usb
-#to use bus instead of vendor id: -b 1 -g 2, for 001 and 002
-sleep 20
-
-#3
-lsusb | sudo awk '/Terminus.*Hub$/{ system("/usr/bin/usbreset " $6) }'
+#lsusb | sudo awk '/Terminus.*Hub$/{ system("/usr/bin/usbreset " $6) }'
 #Uses built in debian usbresest command, a custom version is installed in tools
 #User will have to update exeucatable path to this tool
-sleep 30
-sudo /sbin/shutdown -r now
+#sudo /sbin/shutdown -r now
