@@ -40,6 +40,10 @@ fi
 
 echo "$user_var	ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+echo "workaround for dialout issues that occur sometimes for unknown reasons" 
+usermod -a -G dialout $user_var
+usermod -a -G tty $user_var
+
 
 echo "De-yeeting Hologram SDK..."
 mv hologram /etc/ppp/peers
