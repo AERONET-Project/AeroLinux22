@@ -50,6 +50,8 @@ The remote configuration requires a Hologram Nova modem to transfer data. These 
 Your linux device must be connected to internet to clone the directory and install the required packages.
 When setting up your Linux system please run the following commands.
 
+*Note; sometimes you need to do a sudo date -s "Dec XX 20XX" of current month to be in time allowable window for download of updates*
+
 Update the apt tool,
 ```bash
   sudo apt --fix-missing update -y
