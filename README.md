@@ -6,6 +6,13 @@ This software package enables Linux devices to transfer data from Cimel sun phot
 #### Version 1.1.1 ####
  * On boot, sends a network settings message to our server via FTP
  * Watch runs on a 26 hour basis now
+#### Version 1.2.0 ####
+ * Chrony installation for auto NTP setup and disciplining
+ * USB modem reset changed to properly issue a real AT based reset vs USB bus reset
+ * Dynamic Symlinking of Modem second TTY port for AT commands using udev rules added
+ * Fixed issue with failure to access USB UART converters, tty/dialout groups added
+ * Placeholder.tapestry
+
 #### Bug/ Issues/ To-Do List (Bugs Bolded and Italic)
  *  ***0Byte sessions of 12 hour, likely narrowed down to issues with completing handshake with tower based on "stale" information in modem, needs a reset and reassociate***
  *  ***PPP DNS failures on clean image build using Hologram chatscripts (Yet indeterminate)***
