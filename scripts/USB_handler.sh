@@ -26,7 +26,7 @@ vendid=$(lsusb | awk '$7=="Terminus"{print $6}' | cut -b 6-9) #get vendor id str
 # Reset hologram modem via command to SOC inside instead of rebinding  
 sudo poff -a 
 #Free up USB port for AT command and kill PPPD session 
-sudo echo -n -e "AT+CFUN=1,1 \r\n" > /dev/ttyUSB2
+sudo echo -n -e "AT+CFUN=1,1 \r\n" > /dev/ModemCOM
 #ACTUAL RESET HAPPENS (May require recoding of port number)
 sleep 30
 #Wait for modem to wake back up 
