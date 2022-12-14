@@ -1,0 +1,2 @@
+#Move to /etc/udev/rules.d
+KERNEL=="ttyUSB2", RUN+="/etc/udev/rules.d/amogus.sh" 
