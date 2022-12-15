@@ -19,6 +19,7 @@ sleep 1
 
 echo "setting keymap to FREEDOM edition" 
 localectl set-keyumap us 
+sleep 1
 
 echo "installing pre-reqs" 
 apt-get install -y libcurl4-openssl-dev 
@@ -31,7 +32,15 @@ then
 else
 	echo "Dependencies are installed, continuing with script."
 fi
+sleep 1 
 
+echo "Installing Log2RAM, reduce SD wear and corruption rate" 
+curl -L https://github.com/azlux/log2ram/archive/master.tar.gz | tar zxf -
+cd log2ram-master
+chmod +x install.sh && sudo ./install.sh
+cd ..
+rm -r log2ram-master
+sleep 1
 
 getent group sudo | grep -q "$user_var"
 if [ $? -eq 0 ]; then
