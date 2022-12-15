@@ -2,7 +2,7 @@
 #Now can reset and query status of the modem over ModemCOM that doesn't hard-code paths. 
 #Written by Arsenio Menendez 
 
-KERNEL=="ttyUSB[0-9]*", SUBSYSTEMS=="tty", ENV{ID_VENDOR_ID}=="05c6", ENV{ID_USB_INTERFACE_NUM}=="02", ACTION=="add", SYMLINK+="ModemCOM"
+KERNEL=="ttyUSB[0-9]*", SUBSYSTEMS=="tty", ENV{ID_VENDOR_ID}=="05c6", ENV{ID_USB_INTERFACE_NUM}=="02", ACTION=="add", SYMLINK+="ModemCOM". MODE:="0777"
 #Depreciated subsystems
 #KERNEL=="ttyUSB[0-9]*", ENV{ID_VENDOR_ID}=="05c6", ENV{ID_USB_INTERFACE_NUM}=="02", ACTION=="add", SYMLINK+="ModemCOM"
 #KERNEL=="ttyUSB2", ACTION=="add", SYMLINK+="ModemCOM"
