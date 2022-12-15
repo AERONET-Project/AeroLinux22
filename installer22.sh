@@ -17,6 +17,9 @@ echo "Setting system's timezone to UTC."
 timedatectl set-timezone Etc/UTC
 sleep 1
 
+echo "setting keymap to FREEDOM edition" 
+localectl set-keyumap us 
+
 echo "installing pre-reqs" 
 apt-get install -y libcurl4-openssl-dev 
 apt-get install -y chrony
