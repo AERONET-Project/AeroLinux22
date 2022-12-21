@@ -71,11 +71,12 @@ sleep 1
 echo "Setting NTP using chrony" 
 chronyc makestep 
 
+echo "Setting raw-ip enable perms" 
+chmod g+w /sys/class/net/wwan0/qmi/* 
+sleep 1
 
 echo "Adding cronjobs to user's crontab"
-
 crontab -r
-
 cronjob1="@reboot sleep 60 && /home/$user_var/AeroLinux22/scripts/combined_pi_start_script.sh >> /home/$user_var/logs/connection.log"
 cronjob4="0 0 */2 * * /home/$user_var/AeroLinux22/scripts/k7_k8_check.sh"
 
