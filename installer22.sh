@@ -65,7 +65,8 @@ systemctl disable ModemManager.service
 echo "pest control completed; removed ModemManager"
 sleep 1
 echo "moving UDEV rule to final resting place"
-mv 99-QualcommModem.rules /etc/udev/rules.d  
+mv 99-QualcommModem.rules /etc/udev/rules.d 
+mv 00-ModemWDM.rules /etc/udev/rules.d
 sleep 1
 echo "Setting NTP using chrony" 
 chronyc makestep 
