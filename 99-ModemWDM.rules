@@ -1,4 +1,4 @@
 #UDEV rule to symlink the WDM port of the qualcomm modems. 
 #Written by Arsenio Menendez 
 
-KERNEL=="cdc-wdm[0-9]*", SUBSYSTEMS=="usbmisc", ACTION=="add", SYMLINK+="ModemWDM". MODE:="0777"
+KERNEL=="cdc-wdm[0-9]*", SUBSYSTEMS=="usbmisc", ACTION=="add", SYMLINK+="ModemWDM", MODE:="0777"
