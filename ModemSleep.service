@@ -8,7 +8,7 @@ Description=ModemSleep during shutdown
 [Service]
 Type=oneshot
 RemainAfterExit=true
-ExecStop=/home/$USER/AeroLinux22/scripts/ModemSleep.sh
+ExecStop=/home/$user_var/AeroLinux22/scripts/ModemSleep.sh
 
 [Install]
 WantedBy=multi-user.target
