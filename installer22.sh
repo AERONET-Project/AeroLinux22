@@ -81,11 +81,9 @@ echo "Adding cronjobs to user's crontab"
 crontab -r
 cronjob1="@reboot sleep 60 && /home/$user_var/AeroLinux22/scripts/combined_pi_start_script.sh >> /home/$user_var/logs/connection.log"
 cronjob2="0 0 */2 * * /home/$user_var/AeroLinux22/scripts/k7_k8_check.sh"
-#cronjob3="@reboot ifconfig wwan0 down; echo Y > /sys/class/net/wwan0/qmi/raw_ip; ifconfig wwan0 up" #set iface wwan0 to raw ip mode for QMI net 
 
 { crontab -l -u $user_var 2>/dev/null; echo "$cronjob1"; } | crontab -u $user_var -
 { crontab -l -u $user_var; echo "$cronjob2"; } | crontab -u $user_var -
-#{ crontab -l -u $user_var; echo "$cronjob3"; } | crontab -u $user_var -
 
 
 sleep 1
