@@ -18,7 +18,7 @@ timedatectl set-timezone Etc/UTC
 sleep 1
 
 echo "setting keymap to FREEDOM edition" 
-localectl set-keyumap us 
+localectl set-keymap us 
 sleep 1
 
 echo "installing pre-reqs" 
