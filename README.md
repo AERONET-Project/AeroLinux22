@@ -21,7 +21,7 @@ This software package enables Linux devices to transfer data from Cimel sun phot
  *  Design and build of a supercapacitor based UPS to carry over operation long enough to graceful shutdown 
  *  Button for end location user to be able to gracefully shut down the pi, LED embedded to show when clear to unplug when lit. 
  *  Battery voltage monitoring of solar panel output including logging with graceful shutdown if voltage drops out. 
- *  Implement a modeswitch of Modem to power saving mode when not in use to reduce current draw of radio that can drain battery. 
+ *  ~~Implement a modeswitch of Modem to power saving mode when not in use to reduce current draw of radio that can drain battery.~~ (Done, also shut down modem when pi is off) 
  *  Design monolithic carrier board for pi as a cover till we can get ANTs coming in the pipe. 
 
 ## Appendix
