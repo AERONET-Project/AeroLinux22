@@ -72,8 +72,8 @@ systemctl enable ModemSleep.service
 chmod +x /scripts/ModemSleep.sh
 
 echo "Setup of network start/stop symlinks"
-alias GSM-Up="bash /home/AeroLinux22/scripts/GSM-Up"
-alias GSM-Down="bash /home/AeroLinux22/scripts/GSM-Down"
+alias GSM-Up="bash /home/$user_var/AeroLinux22/scripts/GSM-Up"
+alias GSM-Down="bash /home/$user_var/AeroLinux22/scripts/GSM-Down"
 chmod +x /scripts/GSM-Up 
 chmod +x /scripts/GSM-Down 
 
