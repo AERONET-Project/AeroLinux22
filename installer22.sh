@@ -38,7 +38,7 @@ sleep 1
 echo "Installing Log2RAM, reduce SD wear and corruption rate" 
 curl -L https://github.com/azlux/log2ram/archive/master.tar.gz | tar zxf -
 cd log2ram-master
-chmod +x install.sh && sudo ./install.sh
+chmod +x install.sh && ./install.sh
 cd ..
 rm -r log2ram-master
 sleep 1
