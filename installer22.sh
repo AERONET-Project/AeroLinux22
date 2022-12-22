@@ -69,7 +69,15 @@ sleep 1
 echo "Setting up modem sleep service on shutdown" 
 mv ModemSleep.service /etc/systemd/system/
 systemctl enable ModemSleep.service
+chmod +x /scripts/ModemSleep.sh
 
+echo "Setup of network start/stop symlinks"
+alias GSM-Up='bash /home/AeroLinux22/scripts/GSM-Up'
+alias GSM-Down= 'bash /home/AeroLinux22/scripts/GSM-Down'
+chmod +x /scripts/GSM-Up 
+chmod +x /scripts/GSM-Down 
+
+sleep 1
 echo "Setting NTP using chrony" 
 chronyc makestep 
 

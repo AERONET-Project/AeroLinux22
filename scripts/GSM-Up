@@ -1,3 +1,4 @@
+#!/bin/bash
 #GSM network startup script for Hologram modems over QMI
 #Written by Arsenio Menendez
 
@@ -20,3 +21,4 @@ sudo qmi-network /dev/ModemWDM start;
 sleep 2; 
 #Handshake and get issued a DHCP address
 sudo udhcpc -i wwan0; 
+#Need to implement verification of link before hand-off and exit of script. 

@@ -1,3 +1,4 @@
+#!/bin/bash
 #GSM network shutdown script for Hologram modems over QMI
 #Written by Arsenio Menendez
 
