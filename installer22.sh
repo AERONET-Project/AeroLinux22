@@ -72,10 +72,18 @@ systemctl enable ModemSleep.service
 chmod +x /scripts/ModemSleep.sh
 
 echo "Setup of network start/stop symlinks"
-alias GSM-Up="bash /home/$USER/AeroLinux22/scripts/GSM-Up"
-alias GSM-Down="bash /home/$USER/AeroLinux22/scripts/GSM-Down"
 chmod +x /scripts/GSM-Up 
 chmod +x /scripts/GSM-Down 
+echo "alias GSM-Up="bash /home/$USER/AeroLinux22/scripts/GSM-Up"" >> ~/.bash_aliases
+echo "alias GSM-Down="bash /home/$USER/AeroLinux22/scripts/GSM-Down"" >> ~/.bash_aliases
+#jank way of shutting down modem on shutdown, not optimal but it works
+echo "alias shutdown="sudo qmicli -d /dev/ModemWDM --dms-set-operating-mode=low-power; shutdown -h now"" >> ~/.bash_aliases
+echo "if [ -f ~/.bash_aliases ]; then" >> ~/.bash_aliases
+echo ". ~/.bash_aliases" >> ~/.bash_aliases
+echo "fi" >> ~/.bash_aliases
+source ~/.bash_aliases
+# echoes into bash alias for testing
+
 
 sleep 1
 echo "Setting NTP using chrony" 
