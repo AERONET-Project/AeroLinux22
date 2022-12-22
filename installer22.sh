@@ -129,4 +129,4 @@ sleep 1
 echo "==========================="
 echo "Build complete"
 echo "Please execute a reboot to hard reload daemons and kernel changes"
-sudo reboot 
+#sudo reboot 
