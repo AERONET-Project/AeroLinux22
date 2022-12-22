@@ -13,7 +13,7 @@ sleep 2;
 sudo qmicli -d /dev/ModemWDM --set-expected-data-format=raw-ip; 
 sleep 1;
 #Up the WWAN interface
-ifconfig wwan0 up;
+sudo ifconfig wwan0 up;
 sleep 1; 
 #Start up and connect the IP pipe
 sudo qmi-network /dev/ModemWDM start; 

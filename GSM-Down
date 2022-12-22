@@ -5,7 +5,7 @@
 sudo qmi-network /dev/ModemWDM stop; 
 sleep 2; 
 #Down the WWAN interface
-ifconfig wwan0 down;
+sudo ifconfig wwan0 down;
 sleep 1; 
 #Switch modem mode into low power
 sudo qmicli -d /dev/ModemWDM --dms-set-operating-mode=low-power; 
