@@ -24,6 +24,7 @@ sleep 1
 echo "installing pre-reqs" 
 apt-get install -y libcurl4-openssl-dev 
 apt-get install -y chrony
+apt-get install -y libqmi-utils udhcpc
 #apt install -y ip 
 #apt install -y pppd
 if [[ $> 0 ]]
