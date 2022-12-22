@@ -1,0 +1,14 @@
+#LowPowerMode modem during shutdown sequence
+#belongs in /etc/systemd/system/
+#written by Arsenio Menendez
+
+[Unit]
+Description=ModemSleep during shutdown
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStop=/home/AeroLinux22/scripts/ModemSleep.sh
+
+[Install]
+WantedBy=multi-user.target
