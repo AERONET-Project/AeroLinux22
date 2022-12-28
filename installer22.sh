@@ -70,6 +70,7 @@ echo "Setting up modem sleep service on shutdown"
 mv ModemSleep.service /etc/systemd/system/
 systemctl enable ModemSleep.service
 chmod +x /scripts/ModemSleep.sh
+chmod g+w /scripts/*
 
 echo "Setup of network start/stop symlinks"
 chmod +x /home/$user_var/AeroLinux22/scripts/GSM-Up 
@@ -100,10 +101,11 @@ echo "Adding cronjobs to user's crontab"
 crontab -r
 cronjob1="@reboot sleep 60 && /home/$user_var/AeroLinux22/scripts/combined_pi_start_script.sh >> /home/$user_var/logs/connection.log"
 cronjob2="0 0 */2 * * /home/$user_var/AeroLinux22/scripts/k7_k8_check.sh"
+cronjob3="@reboot sleep 1 && /home/$user_var/AeroLinux22/scripts/ModemAutoset.sh" 
 
 { crontab -l -u $user_var 2>/dev/null; echo "$cronjob1"; } | crontab -u $user_var -
 { crontab -l -u $user_var; echo "$cronjob2"; } | crontab -u $user_var -
-
+{ crontab -l -u $user_var; echo "$cronjob3"; } | crontab -u $user_var -
 
 sleep 1
 echo "Building new directories..."
