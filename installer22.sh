@@ -74,15 +74,15 @@ chmod +x /home/$user_var/AeroLinux22/scripts/GSM-Up
 chmod +x /home/$user_var/AeroLinux22/scripts/GSM-Down 
 echo "setting up aliases like you're Jason Bourne"
 sleep 1
-echo "alias GSM-Up="bash /home/$user_var/AeroLinux22/scripts/GSM-Up"" >>  /home/$user_var/.bash_aliases
-echo "alias GSM-Down="bash /home/$user_var/AeroLinux22/scripts/GSM-Down"" >> /home/$user_var/.bash_aliases
+#echo "alias GSM-Up="bash /home/$user_var/AeroLinux22/scripts/GSM-Up"" >>  /home/$user_var/.bash_aliases
+#echo "alias GSM-Down="bash /home/$user_var/AeroLinux22/scripts/GSM-Down"" >> /home/$user_var/.bash_aliases
 #jank way of shutting down modem on shutdown, not optimal but it works
-echo 'alias shutdown="sudo qmicli -d /dev/ModemWDM --dms-set-operating-mode=low-power; shutdown -h now"' >>  /home/$user_var/.bash_aliases
-echo "if [ -f ~/.bash_aliases ]; then" >>  /home/$user_var/.bash_aliases
-echo ". ~/.bash_aliases" >>  /home/$user_var/.bash_aliases
-echo "fi" >>  /home/$user_var/.bash_aliases
-source  /home/$user_var/.bash_aliases
-chmod 777  /home/$user_var/.bash_aliases
+#echo 'alias shutdown="sudo qmicli -d /dev/ModemWDM --dms-set-operating-mode=low-power; shutdown -h now"' >>  /home/$user_var/.bash_aliases
+#echo "if [ -f ~/.bash_aliases ]; then" >>  /home/$user_var/.bash_aliases
+#echo ". ~/.bash_aliases" >>  /home/$user_var/.bash_aliases
+#echo "fi" >>  /home/$user_var/.bash_aliases
+#source  /home/$user_var/.bash_aliases
+#chmod 777  /home/$user_var/.bash_aliases
 # echoes into bash alias for testing
 
 echo "adding PATH variables" 
