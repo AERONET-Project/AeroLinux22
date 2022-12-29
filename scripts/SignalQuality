@@ -14,5 +14,5 @@ elif (($var >=53 && $var <75))
 then echo $var ":  Excellent"
  
 else
-echo "NO SIGNAL; Dial ET to phone home at 8675301"
+echo "NO SIGNAL; Dial ET to phone home at 8675309"
 fi 
