@@ -2,10 +2,11 @@
 
 #  -----------------------------------------------------------------
 # |This script installs the necessary packages on a Linux system    |
-# | It includes a Python installation to operate a modem	    |
-# | The script is meant to run once, running again will add new user|
-# | Author: anthony.d.larosa@nasa.gov				    |
+# | It is based around QMI network pipe on Hologram NOVA  modems    |
+# | The script is meant to run once, but can be reran               |
+# | Author: arsenio.r.menendez@nasa.gov				                |
 #  -----------------------------------------------------------------
+
 user_var=$(logname)
 
 if [ `id -u` -ne 0 ]; then
