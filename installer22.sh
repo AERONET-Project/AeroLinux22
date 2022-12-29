@@ -22,11 +22,7 @@ localectl set-keymap us
 sleep 1
 
 echo "installing pre-reqs" 
-apt-get install -y libcurl4-openssl-dev 
-apt-get install -y chrony
-apt-get install -y libqmi-utils udhcpc
-#apt install -y ip 
-#apt install -y pppd
+apt-get install -y libcurl4-openssl-dev chrony libqmi-utils udhcpc
 if [[ $> 0 ]]
 then
 	echo "libcurl and recs failed to install, exiting."
@@ -70,24 +66,26 @@ echo "Setting up modem sleep service on shutdown"
 mv ModemSleep.service /etc/systemd/system/
 systemctl enable ModemSleep.service
 chmod +x /scripts/ModemSleep.sh
-chmod g+w /scripts/*
+chmod g+w /home/$user_var/AeroLinux22/scripts/*
 
 echo "Setup of network start/stop symlinks"
 chmod +x /home/$user_var/AeroLinux22/scripts/GSM-Up 
 chmod +x /home/$user_var/AeroLinux22/scripts/GSM-Down 
 echo "setting up aliases like you're Jason Bourne"
 sleep 1
-echo "alias GSM-Up="bash /home/$user_var/AeroLinux22/scripts/GSM-Up"" >> ~/.bash_aliases
-echo "alias GSM-Down="bash /home/$user_var/AeroLinux22/scripts/GSM-Down"" >> ~/.bash_aliases
+echo "alias GSM-Up="bash /home/$user_var/AeroLinux22/scripts/GSM-Up"" >>  /home/$user_var/.bash_aliases
+echo "alias GSM-Down="bash /home/$user_var/AeroLinux22/scripts/GSM-Down"" >> /home/$user_var/.bash_aliases
 #jank way of shutting down modem on shutdown, not optimal but it works
-echo 'alias shutdown="sudo qmicli -d /dev/ModemWDM --dms-set-operating-mode=low-power; shutdown -h now"' >> .bash_aliases
-echo "if [ -f ~/.bash_aliases ]; then" >> .bash_aliases
-echo ". ~/.bash_aliases" >> .bash_aliases
-echo "fi" >> .bash_aliases
-source .bash_aliases
-chmod 777 .bash_aliases
+echo 'alias shutdown="sudo qmicli -d /dev/ModemWDM --dms-set-operating-mode=low-power; shutdown -h now"' >>  /home/$user_var/.bash_aliases
+echo "if [ -f ~/.bash_aliases ]; then" >>  /home/$user_var/.bash_aliases
+echo ". ~/.bash_aliases" >>  /home/$user_var/.bash_aliases
+echo "fi" >>  /home/$user_var/.bash_aliases
+source  /home/$user_var/.bash_aliases
+chmod 777  /home/$user_var/.bash_aliases
 # echoes into bash alias for testing
 
+echo "adding PATH variables" 
+echo 'PATH="$HOME/AeroLinux22/scripts:$PATH"' >> .bashrc 
 
 sleep 1
 echo "Setting NTP using chrony" 
