@@ -6,14 +6,14 @@ then
         #sudo qmicli -p -d /dev/ModemWDM --nas-get-signal-strength 
         sudo qmicli -p -d /dev/ModemWDM --nas-get-signal-info
         sudo qmicli -p -d /dev/ModemWDM --nas-get-tx-rx-info=lte
-        sudo ./modemstat.sh -q
+        #sudo ./modemstat.sh -q
 
 else
         sudo qmicli -p -d /dev/ModemWDM --nas-get-cell-location-info >> $HOME/logs/modem_diagnostics.log
         #sudo qmicli -p -d /dev/ModemWDM --nas-get-signal-strength >> $HOME/logs/modem_diagnostics.log
         sudo qmicli -p -d /dev/ModemWDM --nas-get-signal-info >> $HOME/logs/modem_diagnostics.log
         sudo qmicli -p -d /dev/ModemWDM --nas-get-tx-rx-info=lte >> $HOME/logs/modem_diagnostics.log
-        sudo ./modemstat.sh -q >> $HOME/logs/modem_diagnostics.log
+        #sudo ./modemstat.sh -q >> $HOME/logs/modem_diagnostics.log
 fi
 
 
