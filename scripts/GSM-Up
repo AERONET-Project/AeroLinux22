@@ -42,5 +42,5 @@ else
         #otherwise, figure out how to get relaunch of program to try resetting modem. 
         echo "not found on $i"
 fi
-
+echo "Link Active and Live"
 done
