@@ -3,22 +3,44 @@
 #Written by Arsenio Menendez
 
 #Switch modem mode into online
-sudo qmicli -d /dev/ModemWDM --dms-set-operating-mode=online; 
+sudo qmicli -d /dev/ModemWDM --dms-set-operating-mode=online;
 #Stop any existing network pipe
-sudo qmi-network /dev/ModemWDM stop; 
+sudo qmi-network /dev/ModemWDM stop;
 sleep 1; 
 #Down the WWAN interface
-sudo ifconfig wwan0 down; 
-sleep 2; 
+sudo ifconfig wwan0 down;
+sleep 2;
 #Set mode to raw-ip instead of ethernet
-sudo qmicli -d /dev/ModemWDM --set-expected-data-format=raw-ip; 
+sudo qmicli -d /dev/ModemWDM --set-expected-data-format=raw-ip;
 sleep 1;
 #Up the WWAN interface
 sudo ifconfig wwan0 up;
-sleep 1; 
+sleep 1;
 #Start up and connect the IP pipe
-sudo qmi-network /dev/ModemWDM start; 
-sleep 2; 
+sudo qmi-network /dev/ModemWDM start;
+sleep 2;
 #Handshake and get issued a DHCP address
-sudo udhcpc -i wwan0; 
+sudo udhcpc -i wwan0;
 #Need to implement verification of link before hand-off and exit of script. 
+
+#link verification stuff? 
+for i in {1..3}
+do
+
+MYTIME=$(date +%s)
+FILENAME=$HOME/AeroLinux22/Scripts/pulse.out
+wget --no-check-certificate  -q  -O $FILENAME "https://aeronet.gsfc.nasa.gov/cgi-bin/aeronet_time_new?pc_time=$MYTIME"
+#Wget grabs the file with dynamically passed pc time from AEROENET server
+
+if grep -q "$MYTIME" $FILENAME
+#Checks for matching time variable of unix timestamp in retrieved file
+then
+        #if it finds the heartbeat; great! 
+        echo "found heartbeat to NASA AERONET server"
+        break
+else
+        #otherwise, figure out how to get relaunch of program to try resetting modem. 
+        echo "not found on $i"
+fi
+
+done
