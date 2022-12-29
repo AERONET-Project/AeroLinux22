@@ -1,0 +1,18 @@
+#!/bin/bash 
+# Quick snippet code to do baseline check of signal quality of CSQ style output, but human readable. 
+
+
+var=$(sudo qmicli -p -d /dev/ModemWDM --nas-get-signal-info | grep RSSI | grep -o -E '[0-9]+' )
+
+if (($var >=94 && $var <= 109))
+then echo $var ":  Marginal"
+elif (($var >=85 && $var <94))
+then echo $var ":  OK"
+elif (($var >=75 && $var <85))
+then echo $var ":  Good"
+elif (($var >=53 && $var <75)) 
+then echo $var ":  Excellent"
+ 
+else
+echo "NO SIGNAL; Dial ET to phone home at 8675301"
+fi 
