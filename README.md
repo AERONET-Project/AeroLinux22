@@ -11,12 +11,19 @@ This software package enables Linux devices to transfer data from Cimel sun phot
  * USB modem reset changed to properly issue a real AT based reset vs USB bus reset
  * Dynamic Symlinking of Modem second TTY port for AT commands using udev rules added
  * Fixed issue with failure to access USB UART converters, tty/dialout groups added
+ * Depreciation of PPP in favor of QMI for network instancing
+ * Added automatic reset and QMI instancing of Modem on boot
+ * Simple command launch of QMI network up and down
+ * Added quick actions to PATH 
+ * Modem auto-wakes on network up function, then autosleeps when disconnected
+ * Signal quality readout quick function added 
+ * Cellular signal diagnostics output to logger implemented
  * Placeholder.tapestry
 
 #### Bug/ Issues/ To-Do List (Bugs Bolded and Italic)
  *  ***0Byte sessions of 12 hour, likely narrowed down to issues with completing handshake with tower based on "stale" information in modem, needs a reset and reassociate***
  *  ~~***PPP DNS failures on clean image build using Hologram chatscripts (Yet indeterminate)***~~ PPPD removed, now on QMI
- *  Switching the modem status check to actually read the modem state back over serial and then determine actions, culminating in obsoleting of the USB subsystem reset and driver unbind reset mode (does not appear to work). 
+ *  ~~Switching the modem status check to actually read the modem state back over serial and then determine actions, culminating in obsoleting of the USB subsystem reset and driver unbind reset mode (does not appear to work). ~~(Implemented and working great!)
  *  Power loss causes corruption of SD card, need to implement graceful shutdown and power watchdog to reset pi on power return unless pi asserting boot 
  *  Design and build of a supercapacitor based UPS to carry over operation long enough to graceful shutdown 
  *  Button for end location user to be able to gracefully shut down the pi, LED embedded to show when clear to unplug when lit. 
