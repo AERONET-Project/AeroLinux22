@@ -4,7 +4,7 @@ for i in {1..3}
 do
 
 MYTIME=$(date +%s)
-FILENAME=$HOME/AeroLinux22/Scripts/pulse.out
+FILENAME=$HOME/AeroLinux22/scripts/pulse.out
 wget --no-check-certificate  -q  -O $FILENAME "https://aeronet.gsfc.nasa.gov/cgi-bin/aeronet_time_new?pc_time=$MYTIME"
 #Wget grabs the file with dynamically passed pc time from AEROENET server
 
