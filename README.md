@@ -7,18 +7,20 @@ This software package enables Linux devices to transfer data from Cimel sun phot
  * On boot, sends a network settings message to our server via FTP
  * Watch runs on a 26 hour basis now
 #### Version 1.2.0 ####
- * Chrony installation for auto NTP setup and disciplining
+ * Chrony installation for auto NTP setup and disciplining on daily heartbeat
  * USB modem reset changed to properly issue a real AT based reset vs USB bus reset
- * Dynamic Symlinking of Modem second TTY port for AT commands using udev rules added
+ * Dynamic Symlinking of Modem second TTY port for AT commands as `/dev/ModemCOM` added via udev rules
+ * Dynamic Symlinking of Modem CDC-WDM port as `/dev/ModemWDM` added via udev rules
  * Fixed issue with failure to access USB UART converters, tty/dialout groups added
  * Depreciation of PPP in favor of QMI for network instancing
  * Added automatic reset and QMI instancing of Modem on boot
- * Simple command launch of QMI network up and down
+ * Simple command launch of QMI network up and down `GSM-Up` and `GSM-Down`
  * Network initialization checks connectivity to AERONET server and validates that 3X before link up flag raised. 
- * Added quick actions to PATH 
+ * Added quick actions to PATH
  * Modem auto-wakes on network up function, then autosleeps when disconnected
- * Signal quality readout quick function added 
- * Cellular signal diagnostics output to logger implemented
+ * Full verbosity of signal/modem diagnostics implemented via `CellSignalDiag -q` to output to terminal
+ * Cellular signal diagnostics output to logger implemented via `CellSignalDiag`
+ * Quick check of `SignalQuality` is implemented, simple dBm (switched to positive) and equivalent CSQ interpretation on output.
  * Placeholder.tapestry
 
 #### Bug/ Issues/ To-Do List (Bugs Bolded and Italic)
