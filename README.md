@@ -14,6 +14,7 @@ This software package enables Linux devices to transfer data from Cimel sun phot
  * Depreciation of PPP in favor of QMI for network instancing
  * Added automatic reset and QMI instancing of Modem on boot
  * Simple command launch of QMI network up and down
+ * Network initialization checks connectivity to AERONET server and validates that 3X before link up flag raised. 
  * Added quick actions to PATH 
  * Modem auto-wakes on network up function, then autosleeps when disconnected
  * Signal quality readout quick function added 
