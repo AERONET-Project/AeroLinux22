@@ -9,6 +9,7 @@ This software package enables Linux devices to transfer data from Cimel sun phot
 #### Version 1.2.0 ####
  * Chrony installation for auto NTP setup and disciplining on daily heartbeat
  * USB modem reset changed to properly issue a real AT based reset vs USB bus reset
+ * USB modem manual sleep `ModemSleep` and reset `ModemReset.sh` added
  * Dynamic Symlinking of Modem second TTY port for AT commands as `/dev/ModemCOM` added via udev rules
  * Dynamic Symlinking of Modem CDC-WDM port as `/dev/ModemWDM` added via udev rules
  * Fixed issue with failure to access USB UART converters, tty/dialout groups added
