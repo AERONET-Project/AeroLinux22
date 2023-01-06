@@ -86,7 +86,7 @@ sleep 1
 # echoes into bash alias for testing
 
 echo "adding PATH variables" 
-echo 'PATH="$HOME/AeroLinux22/scripts:$PATH"' >> .bashrc 
+echo 'PATH="$HOME/AeroLinux22/scripts:$PATH"' >> /home/$user_var/.bashrc 
 
 sleep 1
 echo "Setting NTP using chrony" 
