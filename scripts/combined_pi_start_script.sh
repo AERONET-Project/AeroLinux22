@@ -15,9 +15,9 @@ if [ -z "$modem_check" ]; then #Checks if modem_check is 0/empty - i.e., no mode
 
 else #Sees that modem_check has value and proceeds as modem is connected
         echo "A USB modem is connected" >> $HOME/logs/modem_diagnostics.log
-        GSM-Up  >> $HOME/logs/modem_diagnostics.log
+        $HOME/AeroLinux22/scripts/GSM-Up  >> $HOME/logs/modem_diagnostics.log
         $HOME/AeroLinux22/bin/pi_ftp_upload  >> $HOME/logs/modem_diagnostics.log
-        GSM-Down  >> $HOME/logs/modem_diagnostics.log
+        $HOME/AeroLinux22/scripts/GSM-Down  >> $HOME/logs/modem_diagnostics.log
 fi
 
 sleep 180
