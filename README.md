@@ -34,7 +34,9 @@ This software package enables Linux devices to transfer data from Cimel sun phot
  *  Battery voltage monitoring of solar panel output including logging with graceful shutdown if voltage drops out. 
  *  ~~Implement a modeswitch of Modem to power saving mode when not in use to reduce current draw of radio that can drain battery.~~ (Done, also shut down modem when pi is off) 
  *  Design monolithic carrier board for pi as a cover till we can get ANTs coming in the pipe. 
- * using "Hardware" or "Model" output of the cat /proc/cpuinfo, make deterministic selection of package install procedure and instantiation of GPIO/subsystems for ANT/Pi 
+ *  using "Hardware" or "Model" output of the cat /proc/cpuinfo, make deterministic selection of package install procedure and instantiation of GPIO/subsystems for ANT/Pi 
+ * Issue noted with QMI `GSM-Up` throwing a ``not found`` error from `sh` enumerating as a cURL error 6 DNS fail. 
+ * Above issue also seems to not have correct hook to sleep modem with `GSM-Down` either. 
 
 ## Appendix
 
