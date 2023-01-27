@@ -120,7 +120,10 @@ Step 0.  decide if local
 
     if (!if_local && (!init_upload))
     {
-        system("GSM-Down");
+        //kinda hacky method to call script correctly from full path programatically. 
+        char *home, command[1000];
+        home= getenv("HOME"); 
+        sprintf(command, "%s/scripts/GSM-Down",home);
     }
 
     /*
