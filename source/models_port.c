@@ -154,14 +154,14 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     FILE *rd;
     char buffer[101], message_text[300];
     char *home, command[1000];
-    home= getenv("HOME");   //get the HOME environment variable
+    home= getenv("HOME");//get the HOME environment variable
     output_message_to_log(log_file, "Will activate modem\n");
     pc_time = time(NULL);
     //form the command with option to save to standard input    
     sprintf(command,"%s/scripts/GSM-Up >2&1",home);
     //read the process
     rd=popen(command,"r");
-    rd = popen("GSM-Up 2>&1", "r"); // redirect error output to stdout
+    //rd = popen("GSM-Up 2>&1", "r"); // redirect error output to stdout
 
     if (rd == NULL)
     {
