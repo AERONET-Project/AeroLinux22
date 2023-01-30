@@ -62,6 +62,7 @@ sleep 1
 echo "moving UDEV rule to final resting place"
 mv 99-QualcommModem.rules /etc/udev/rules.d 
 mv 99-ModemWDM.rules /etc/udev/rules.d
+mv chrony.conf /etc/chrony.conf
 sleep 1
 echo "Setting up modem sleep service on shutdown" 
 mv ModemSleep.service /etc/systemd/system/
