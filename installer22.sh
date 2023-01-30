@@ -86,6 +86,13 @@ sleep 1
 #chmod 777  /home/$user_var/.bash_aliases
 # echoes into bash alias for testing
 
+echo "Fighting a demon named Avahi" 
+sudo systemctl stop avahi-daemon.socket
+sudo systemctl stop avahi-daemon
+sudo systemctl disable avahi-daemon.socket
+sudo systemctl disable avahi-daemon 
+sleep 1
+
 echo "adding PATH variables" 
 echo 'PATH="$HOME/AeroLinux22/scripts:$PATH"' >> /home/$user_var/.bashrc 
 
