@@ -122,6 +122,7 @@ Step 0.  decide if local
     {
         //kinda hacky method to call script correctly from full path programatically. 
         sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
     }
 
     /*
@@ -275,6 +276,7 @@ start main loop
                 upload_daily_connection_log_to_ftp(log_file, username);
                 if (!if_local)
                     sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                 sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                         log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                 log_day = log_day1;
@@ -347,6 +349,7 @@ start main loop
 
                         pc_time = time(NULL);
                         sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                         stop_time = time(NULL);
                         sprintf(message_text, "Modem disconnected after %d seconds\n", stop_time - pc_time);
                         output_message_to_log(log_file, message_text);
@@ -394,6 +397,7 @@ start main loop
 
                     if (!if_local)
                         sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                     sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                             log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                     log_day = log_day1;
@@ -490,6 +494,7 @@ start main loop
 
                         pc_time = time(NULL);
                         sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                         stop_time = time(NULL);
                         sprintf(message_text, "Modem disconnected after %d seconds\n", stop_time - pc_time);
                         output_message_to_log(log_file, message_text);
@@ -565,6 +570,7 @@ start main loop
 
                             pc_time = time(NULL);
                             sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                             stop_time = time(NULL);
                             sprintf(message_text, "Modem disconnected after %d seconds\n", stop_time - pc_time);
                             output_message_to_log(log_file, message_text);
@@ -624,6 +630,7 @@ start main loop
 
                             if (!if_local)
                                 sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                             sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                                     log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                             log_day = log_day1;
@@ -661,6 +668,7 @@ start main loop
 
                             if (!if_local)
                                 sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                             sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                                     log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                             log_day = log_day1;
@@ -699,6 +707,7 @@ start main loop
 
                             if (!if_local)
                                 sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                             sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                                     log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                             log_day = log_day1;
@@ -778,6 +787,7 @@ start main loop
                                 upload_daily_connection_log_to_ftp(log_file, username);
                                 if (!if_local)
                                     sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                                 exit(0);
                             }
                             if (T_receive_header_from_port(&mcport, &k8b, log_file))
@@ -811,6 +821,7 @@ start main loop
 
                                     if (!if_local)
                                         sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                                     sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                                             log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                                     log_day = log_day1;
@@ -834,6 +845,7 @@ start main loop
                                     upload_daily_connection_log_to_ftp(log_file, username);
                                     if (!if_local)
                                         sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                                     exit(0);
                                 }
 
@@ -887,6 +899,7 @@ start main loop
 
                                 pc_time = time(NULL);
                                 sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                                 stop_time = time(NULL);
                                 sprintf(message_text, "Modem disconnected after %d seconds\n", stop_time - pc_time);
                                 output_message_to_log(log_file, message_text);
@@ -921,6 +934,7 @@ start main loop
                                 upload_daily_connection_log_to_ftp(log_file, username);
                                 if (!if_local)
                                     sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                                 exit(0);
                             }
                             if (T_receive_header_from_port(&mcport, &k8b, log_file))
@@ -945,6 +959,7 @@ start main loop
 
                                     if (!if_local)
                                         sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
                                     sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                                             log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                                     log_day = log_day1;
@@ -976,6 +991,7 @@ start main loop
 
                                     if (!if_local)
                                         sprintf(command, "%s/AeroLinux22/scripts/GSM-Down",homedir);
+                        popen(command,"r");
 
                                     sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                                             log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
