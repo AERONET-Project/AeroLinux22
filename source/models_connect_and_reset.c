@@ -112,6 +112,7 @@ Step 0.  decide if local
 
                 init_upload = 0;
                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
+                    printf("aMogus exit");
                     exit(0);
             }
 
@@ -272,7 +273,8 @@ start main loop
                     if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                     {
                         upload_daily_connection_log_to_ftp(log_file, username);
-                        exit(0);
+                        printf("aMogus exit");
+                    exit(0);
                     }
                 }
                 find_and_upload_backup_files(log_day, backup_dir, log_file);
@@ -294,6 +296,7 @@ start main loop
                 {
                     sprintf(message_text, "No Serial - USB ports are detected\nProgram %s stop\n", argv[0]);
                     output_message_to_log(log_file, message_text);
+                    printf("aMogus exit");
                     exit(0);
                 }
                 strcpy(mcport.port_name, usb_port);
@@ -301,6 +304,7 @@ start main loop
                 if (!open_my_com_port(&mcport, _MODEL_T_, log_file))
                 {
                     output_message_to_log(log_file, "Port cannot be opened. Stop the program\n");
+                    printf("aMogus exit");
                     exit(0);
                 }
 
@@ -319,7 +323,8 @@ start main loop
                     if (!open_my_com_port(&mcport, _MODEL_5_, log_file))
                     {
                         output_message_to_log(log_file, "Port cannot be opened. Stop the program\n");
-                        exit(0);
+                        printf("aMogus exit");
+                    exit(0);
                     }
                     V5_wait_for_new_packet(&mcport);
                     V5_init_port_receiption(&mcport);
@@ -341,7 +346,8 @@ start main loop
                     if (!if_local)
                     {
                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
-                            exit(0);
+                            printf("aMogus exit");
+                    exit(0);
                     }
 
                     libcurl_upload_cimel_buffer_to_https(&k8bd, log_file, 1);
@@ -393,7 +399,8 @@ start main loop
                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                         {
                             upload_daily_connection_log_to_ftp(log_file, username);
-                            exit(0);
+                            printf("aMogus exit");
+                    exit(0);
                         }
                     }
 
@@ -457,7 +464,8 @@ start main loop
                     if (!if_local)
                     {
                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
-                            exit(0);
+                            printf("aMogus exit");
+                    exit(0);
                     }
 
                     if (upload_switch_m == 2)
@@ -559,7 +567,8 @@ start main loop
                             if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                             {
                                 upload_daily_connection_log_to_ftp(log_file, username);
-                                exit(0);
+                                printf("aMogus exit");
+                    exit(0);
                             }
                         }
 
@@ -594,7 +603,8 @@ start main loop
                         if (!define_usb_com_port(usb_port, log_file))
                         {
                             output_message_to_log(log_file, "Port unavilable. Stop the program\n");
-                            exit(0);
+                            printf("aMogus exit");
+                    exit(0);
                         }
 
                         strcpy(mcport.port_name, usb_port);
@@ -602,7 +612,8 @@ start main loop
                         {
                             sprintf(message_text, "Port %s cannot be opened. Stop the program\n", usb_port);
                             output_message_to_log(log_file, message_text);
-                            exit(0);
+                            printf("aMogus exit");
+                    exit(0);
                         }
 
                         V5_wait_for_new_packet(&mcport);
@@ -630,7 +641,8 @@ start main loop
                                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                 {
                                     upload_daily_connection_log_to_ftp(log_file, username);
-                                    exit(0);
+                                    printf("aMogus exit");
+                    exit(0);
                                 }
                             }
                             find_and_upload_backup_files(log_day, backup_dir, log_file);
@@ -669,7 +681,8 @@ start main loop
                                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                 {
                                     upload_daily_connection_log_to_ftp(log_file, username);
-                                    exit(0);
+                                    printf("aMogus exit");
+                    exit(0);
                                 }
                             }
                             find_and_upload_backup_files(log_day, backup_dir, log_file);
@@ -708,7 +721,8 @@ start main loop
                                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                 {
                                     upload_daily_connection_log_to_ftp(log_file, username);
-                                    exit(0);
+                                    printf("aMogus exit");
+                    exit(0);
                                 }
                             }
 
@@ -774,7 +788,8 @@ start main loop
                             if (!define_usb_com_port(usb_port, log_file))
                             {
                                 output_message_to_log(log_file, "Port unavilable. Stop the program\n");
-                                exit(0);
+                                printf("aMogus exit");
+                    exit(0);
                             }
 
                             strcpy(mcport.port_name, usb_port);
@@ -792,7 +807,8 @@ start main loop
                                     if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                     {
                                         upload_daily_connection_log_to_ftp(log_file, username);
-                                        exit(0);
+                                        printf("aMogus exit");
+                    exit(0);
                                     }
                                 }
                                 upload_daily_connection_log_to_ftp(log_file, username);
@@ -800,7 +816,8 @@ start main loop
                                     sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
                                     rd=popen(command,"r");
                                     pclose(rd);
-                                exit(0);
+                                printf("aMogus exit");
+                    exit(0);
                             }
                             if (T_receive_header_from_port(&mcport, &k8b, log_file))
                             {
@@ -824,7 +841,8 @@ start main loop
                                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                         {
                                             upload_daily_connection_log_to_ftp(log_file, username);
-                                            exit(0);
+                                            printf("aMogus exit");
+                    exit(0);
                                         }
                                     }
 
@@ -852,7 +870,8 @@ start main loop
                                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                         {
                                             upload_daily_connection_log_to_ftp(log_file, username);
-                                            exit(0);
+                                            printf("aMogus exit");
+                    exit(0);
                                         }
                                     }
                                     upload_daily_connection_log_to_ftp(log_file, username);
@@ -860,7 +879,8 @@ start main loop
                                         sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
                                     rd=popen(command,"r");
                                     pclose(rd);
-                                    exit(0);
+                                    printf("aMogus exit");
+                    exit(0);
                                 }
 
                                 V5_wait_for_new_packet(&mcport);
@@ -879,7 +899,8 @@ start main loop
                                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                 {
                                     upload_daily_connection_log_to_ftp(log_file, username);
-                                    exit(0);
+                                    printf("aMogus exit");
+                    exit(0);
                                 }
                             }
 
@@ -925,7 +946,8 @@ start main loop
                             if (!define_usb_com_port(usb_port, log_file))
                             {
                                 printf("Port unavilable. Stop the program\n");
-                                exit(0);
+                                printf("aMogus exit");
+                    exit(0);
                             }
 
                             strcpy(mcport.port_name, usb_port);
@@ -943,7 +965,8 @@ start main loop
                                     if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                     {
                                         upload_daily_connection_log_to_ftp(log_file, username);
-                                        exit(0);
+                                        printf("aMogus exit");
+                    exit(0);
                                     }
                                 }
                                 upload_daily_connection_log_to_ftp(log_file, username);
@@ -951,7 +974,8 @@ start main loop
                                     sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
                                     rd=popen(command,"r");
                                     pclose(rd);
-                                exit(0);
+                                printf("aMogus exit");
+                    exit(0);
                             }
                             if (T_receive_header_from_port(&mcport, &k8b, log_file))
                             {
@@ -966,7 +990,8 @@ start main loop
                                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                         {
                                             upload_daily_connection_log_to_ftp(log_file, username);
-                                            exit(0);
+                                            printf("aMogus exit");
+                    exit(0);
                                         }
                                     }
 
@@ -999,7 +1024,8 @@ start main loop
                                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                         {
                                             upload_daily_connection_log_to_ftp(log_file, username);
-                                            exit(0);
+                                            printf("aMogus exit");
+                    exit(0);
                                         }
                                     }
 
@@ -1022,7 +1048,8 @@ start main loop
                                 {
                                     sprintf(message_text, "Port %s cannot be opened. Stop the program\n", usb_port);
                                     output_message_to_log(log_file, message_text);
-                                    exit(0);
+                                    printf("aMogus exit");
+                    exit(0);
                                 }
 
                                 V5_wait_for_new_packet(&mcport);
