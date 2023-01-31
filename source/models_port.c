@@ -158,7 +158,7 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     output_message_to_log(log_file, "Will activate modem\n");
     pc_time = time(NULL);
     //form the command with option to save to standard input    
-    sprintf(command,"%s/scripts/GSM-Up >2&1",home);
+    sprintf(command,"%s/scripts/GSM-Up 2>&1",home);
     //read the process
     rd=popen(command,"r");
     //rd = popen("GSM-Up 2>&1", "r"); // redirect error output to stdout
