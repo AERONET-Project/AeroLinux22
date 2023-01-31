@@ -153,7 +153,7 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     time_t pc_time, stop_time;
     FILE *rd;
     char buffer[101], message_text[300];
-    char *homedir = getenv ("HOME")
+    char *homedir = getenv ("HOME");
     char command[1000];
     output_message_to_log(log_file, "Will activate modem\n");
     pc_time = time(NULL);

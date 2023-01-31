@@ -35,7 +35,7 @@ Common variables
     char backup_dir[500], *homedir = getenv("HOME"), log_dir[200], log_file[200], message_text[1000], log_file2[200],
                           *username = getenv("LOGNAME");
     char file_nameh[400], file_named[400], file_namem[400];
-
+    char command[1000];
     int upload_switch, upload_switch_m, upload_switch_d, upload_switch_h, init_upload, if_daily_file_uploaded;
     struct stat bufff;
 
