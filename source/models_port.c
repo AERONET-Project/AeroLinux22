@@ -153,12 +153,11 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     time_t pc_time, stop_time;
     FILE *rd;
     char buffer[101], message_text[300];
-    char *home, command[1000];
-    home= getenv("HOME");//get the HOME environment variable
+    char command[1000];
     output_message_to_log(log_file, "Will activate modem\n");
     pc_time = time(NULL);
     //form the command with option to save to standard input    
-    sprintf(command,"%s/scripts/GSM-Up 2>&1",home);
+    sprintf(command,"%s/AeroLinux22/scripts/GSM-Up 2>&1",dir);
     //read the process
     rd=popen(command,"r");
     //rd = popen("GSM-Up 2>&1", "r"); // redirect error output to stdout
@@ -185,7 +184,7 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     system(usb_reset_command);
     *reset_counter = *reset_counter + 1;
 
-    sprintf(command,"%s/scripts/GSM-Up 2>&1",home);
+    sprintf(command,"%s/AeroLinux22/scripts/GSM-Up 2>&1",homedir);
     //rd = popen("GSM-Up 2>&1", "r"); // redirect error output to stdout
 
     if (rd == NULL)
