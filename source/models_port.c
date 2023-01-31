@@ -185,7 +185,8 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     system(usb_reset_command);
     *reset_counter = *reset_counter + 1;
 
-    rd = popen("GSM-Up 2>&1", "r"); // redirect error output to stdout
+    sprintf(command,"%s/scripts/GSM-Up 2>&1",home);
+    //rd = popen("GSM-Up 2>&1", "r"); // redirect error output to stdout
 
     if (rd == NULL)
     {
