@@ -5,7 +5,6 @@ echo "recompile programs"
 cd $HOME/AeroLinux22/source
 cc -o ../bin/models_connect_and_reset models_connect_and_reset.c models_port.c -lm -lcurl
 cc -o ../bin/pi_ftp_upload pi_ftp_upload.c models_port.c -lm -lcurl
-sleep 60
 
 modem_check=$(lsusb | grep Qualcomm) #returns string if modem was identified
 
@@ -20,7 +19,6 @@ else #Sees that modem_check has value and proceeds as modem is connected
         $HOME/AeroLinux22/scripts/GSM-Down  >> $HOME/logs/modem_diagnostics.log
 fi
 
-sleep 180
 
 
 if [ -z "$modem_check" ]; then
@@ -29,7 +27,6 @@ else
         $HOME/AeroLinux22/bin/models_connect_and_reset hologram >> $HOME/logs/connection.log
 fi
 
-sleep 120
 
 now=$(date)
 
