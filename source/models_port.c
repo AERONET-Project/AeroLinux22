@@ -186,7 +186,7 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     *reset_counter = *reset_counter + 1;
 
     sprintf(command,"%s/AeroLinux22/scripts/GSM-Up 2>&1",homedir);
-    //rd = popen("GSM-Up 2>&1", "r"); // redirect error output to stdout
+    rd = popen(command, "r"); // redirect error output to stdout
 
     if (rd == NULL)
     {
