@@ -1,0 +1,88 @@
+Objectives
+Shutdown Scenarios:
+-The UPS module will initiate a graceful shutdown under the following conditions:
+•	The lipo battery falls below the define threshold and there is no AC power
+•	The power button is pressed
+-The UPS will turn on the raspberry pi when power is restored after a power outage.
+-The UPS has a power indicating LED that shows when the Pi is powered on.
+-There is a config file on the pi to select 
+•	shutdown based on lipo level
+•	log lipo level
+•	shutdown based on ext bat level
+•	log ext batt level
+
+
+ 
+Steps to set up new AEROLinux pi
+•	Flash buster lite
+•	Set date
+•	Add user with sudo rights and set auto login
+o	-https://linuxhint.com/create-new-user-raspberry-pi/
+•	Set keyboard to US
+•	Follow Aeronlinux install process
+o	-https://github.com/AERONET-Project/AeroLinux22/tree/Development
+•	For UPS
+•	Sudo apt-get install python3-pip
+•	Sudo pip3 install smbus
+•	Sudo pip3 install Adafruit_ADS1x15
+•	Enable I2C
+
+ 
+Test Scenarios
+1)
+Objective:  The Pi must shutdown without corruption after power outage and wake back up when power returns
+Test: Pi is run on timed outlet that kills power once an hour for 48 hours.
+Result:  Pi shut down without corruption and woke up successfully 24/24 times as shown pi log files on pi and heartbeat sent to server
+2A)
+Objective: Pi should be able to run on UPS without AC power
+Test: Shutdown threshold was set to 30%.  Pi will shut down.  Log will show how long it ran on UPS
+Result: Pi ran for 52min off of AC power (w/o modem)
+2B) 
+Objective: Pi should be able to run on UPS without AC power
+Test: Shutdown threshold set to 30%.  Pi on timed outlet shutting down ON for 15min OFF for 15min over night (16hr)
+Result: Pi stayed powered on the entire time
+
+3)
+Objective: Pi should be able to withstand power flickers ie power turning on and off multiple times per second
+Test: Pi will run on programable power supply that will kill power multiple times within a 2 minute period
+Result 1:  Learned it is possible for the UPS/ATtiny to kill power to pi during boot (not good)
+Revision: Added 70s delay (time to boot) to UPS/ATtiny boot trigger function so program cannot continue (and possible trigger a shutdown) until boot is finished)
+Result 2: Learned system can end up powered of even when AC power is present if power loss-> shutdown started->power returns during shutdown
+ 
+To Do
+Graceful shutdown from button
+Graceful shutdown based on lipo battery
+Monitor and log external battery
+Power on after power is restored
+Power indicating LED
+Config file:lipo shutdown on/off threshold
+		-external battery on/off/ threshold
+ADD TO SCHEMATIC and pi script : CONNECTION FROM PI(PIN13) TO atTINY(PIN1) TO INDICATE PI POWERED ON, PI PULLS HIGH AT BOOT
+Check order of resistors in both voltage divdeders  both seem to be backwards
+Write function to turn off UPS when pi is off
+Add pull up resistor (external) to ATtiny85 ups switch circuit
+Add get time from google in a try catch
+Add pull up resistor to avoid damaging ATtiny if physical UPS button is used
+Config options: 
+•	shutdown based on lipo level
+•	log lipo level
+•	shutdown based on ext bat level
+•	log ext batt level
+
+Fix glitch:  from Test 3  result 2.  Maybe the Watchdog doesn’t need to check previous USB status?
+Enable program to find username and make custom paths
+Check if solar or AC
+Switch to crontab
+Log how many power outages have occurred
+Determine last USB state by reading not by assigning
+Use a FET to kill 12V power to 12V-5V converter when battery is below threshold.
+	ATtiny controls FET
+	ATtiny powered by lipo
+RESOURCES
+Kicad create schematic symbol:
+https://www.protoexpress.com/blog/how-to-create-a-schematic-and-symbol-library-kicad/
+
+Incorporate time update per
+https://dayne.broderson.org/2020/03/12/the_time_is_now.html
+
+
