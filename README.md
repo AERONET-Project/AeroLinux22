@@ -2,18 +2,18 @@
 
 # AeroLinux Gen 2
 
-##UPS Objectives
-Shutdown Scenarios:
--The UPS module will initiate a graceful shutdown under the following conditions:
-•	The lipo battery falls below the define threshold and there is no AC power
+## UPS Objectives
+Shutdown Scenarios:  
+-The UPS module will initiate a graceful shutdown under the following conditions:  
+•	The lipo battery falls below the define threshold and there is no AC power  
 •	The power button is pressed
--The UPS will turn on the raspberry pi when power is restored after a power outage.
--The UPS has a power indicating LED that shows when the Pi is powered on.
--There is a config file on the pi to select 
-•	shutdown based on lipo level
-•	log lipo level
-•	shutdown based on ext bat level
-•	log ext batt level
+-The UPS will turn on the raspberry pi when power is restored after a power outage.  
+-The UPS has a power indicating LED that shows when the Pi is powered on.  
+-There is a config file on the pi to select   
+•	shutdown based on lipo level  
+•	log lipo level  
+•	shutdown based on ext bat level  
+•	log ext batt level  
 
 This software package enables Linux devices to transfer data from Cimel sun photometers via Ethernet, Wi-Fi or a Hologram Nova cellular modem.
 #### Version 1.1.1 ####
