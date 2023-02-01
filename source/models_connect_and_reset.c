@@ -111,8 +111,9 @@ Step 0.  decide if local
             {
 
                 init_upload = 0;
+                output_message_to_log(log_file,"Connect 1\n");
                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
-                    output_message_to_log(log_file,"aMogus exit first error location");
+                    output_message_to_log(log_file,"aMogus exit first error location\n");
                     exit(0);
             }
 
@@ -269,7 +270,7 @@ start main loop
             if (log_day1 != log_day)
             {
                 if (!if_local)
-                {
+                { output_message_to_log(log_file,"Connect 2\n");
                     if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                     {
                         upload_daily_connection_log_to_ftp(log_file, username);
@@ -344,7 +345,7 @@ start main loop
                     T_save_k8_buffer_on_disk(backup_dir, &k8bd);
 
                     if (!if_local)
-                    {
+                    {output_message_to_log(log_file,"Connect 3\n");
                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                             output_message_to_log(log_file,"aMogus exit generic error\n");
                     exit(0);
@@ -395,7 +396,7 @@ start main loop
                 if (log_day1 != log_day)
                 {
                     if (!if_local)
-                    {
+                    {output_message_to_log(log_file,"Connect 4\n");
                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                         {
                             upload_daily_connection_log_to_ftp(log_file, username);
@@ -462,7 +463,7 @@ start main loop
                 {
 
                     if (!if_local)
-                    {
+                    { output_message_to_log(log_file,"Connect 5\n");
                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                             output_message_to_log(log_file,"aMogus exit K8 Reset failure \n");
                     exit(0);
@@ -563,7 +564,7 @@ start main loop
                         output_message_to_log(log_file, message_text);
 
                         if (!if_local)
-                        {
+                        {output_message_to_log(log_file,"Connect 6\n");
                             if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                             {
                                 upload_daily_connection_log_to_ftp(log_file, username);
@@ -637,7 +638,7 @@ start main loop
                         if (log_day1 != log_day)
                         {
                             if (!if_local)
-                            {
+                            {output_message_to_log(log_file,"Connect 7\n");
                                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                 {
                                     upload_daily_connection_log_to_ftp(log_file, username);
@@ -677,7 +678,7 @@ start main loop
                         if (log_day1 != log_day)
                         {
                             if (!if_local)
-                            {
+                            { output_message_to_log(log_file,"Connect 8\n");
                                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                 {
                                     upload_daily_connection_log_to_ftp(log_file, username);
@@ -717,7 +718,7 @@ start main loop
                         if (log_day1 != log_day)
                         {
                             if (!if_local)
-                            {
+                            {output_message_to_log(log_file,"Connect 9\n");
                                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                 {
                                     upload_daily_connection_log_to_ftp(log_file, username);
@@ -803,7 +804,7 @@ start main loop
                             {
                                 output_message_to_log(log_file, "Port cannot be opened. Stop the program\n");
                                 if (!if_local)
-                                {
+                                {output_message_to_log(log_file,"Connect 10\n");
                                     if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                     {
                                         upload_daily_connection_log_to_ftp(log_file, username);
@@ -837,7 +838,7 @@ start main loop
                                 if (log_day1 != log_day)
                                 {
                                     if (!if_local)
-                                    {
+                                    {output_message_to_log(log_file,"Connect 11\n");
                                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                         {
                                             upload_daily_connection_log_to_ftp(log_file, username);
@@ -866,7 +867,7 @@ start main loop
                                     sprintf(message_text, "Port %s cannot be opened. Stop the program\n", usb_port);
                                     output_message_to_log(log_file, message_text);
                                     if (!if_local)
-                                    {
+                                    {output_message_to_log(log_file,"Connect 12\n");
                                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                         {
                                             upload_daily_connection_log_to_ftp(log_file, username);
@@ -895,7 +896,7 @@ start main loop
                             close_my_port(&mcport);
 
                             if (!if_local)
-                            {
+                            { output_message_to_log(log_file,"Connect 13\n");
                                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                 {
                                     upload_daily_connection_log_to_ftp(log_file, username);
@@ -961,7 +962,7 @@ start main loop
                             {
                                 output_message_to_log(log_file, "Port cannot be opened. Stop the program\n");
                                 if (!if_local)
-                                {
+                                { output_message_to_log(log_file,"Connect 14\n");
                                     if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                     {
                                         upload_daily_connection_log_to_ftp(log_file, username);
@@ -986,7 +987,7 @@ start main loop
                                 if (log_day1 != log_day)
                                 {
                                     if (!if_local)
-                                    {
+                                    {output_message_to_log(log_file,"Connect 15\n");
                                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                         {
                                             upload_daily_connection_log_to_ftp(log_file, username);
@@ -1020,7 +1021,7 @@ start main loop
                                 if (log_day1 != log_day)
                                 {
                                     if (!if_local)
-                                    {
+                                    {output_message_to_log(log_file,"Connect 16\n");
                                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                         {
                                             upload_daily_connection_log_to_ftp(log_file, username);
