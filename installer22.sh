@@ -65,9 +65,9 @@ mv 99-ModemWDM.rules /etc/udev/rules.d
 mv chrony.conf /etc/chrony.conf
 sleep 1
 echo "Setting up modem sleep service on shutdown" 
+chmod +x /scripts/ModemSleep.sh
 mv ModemSleep.service /etc/systemd/system/
 systemctl enable ModemSleep.service
-chmod +x /scripts/ModemSleep.sh
 chmod g+w /home/$user_var/AeroLinux22/scripts/*
 
 echo "Setup of network start/stop symlinks"
@@ -99,6 +99,13 @@ echo 'PATH="$HOME/AeroLinux22/scripts:$PATH"' >> /home/$user_var/.bashrc
 sleep 1
 echo "Setting NTP using chrony" 
 chronyc makestep 
+
+
+sleep 1 
+echo "disabling DCHPCD ON WWAN0"
+echo "denyinterfaces wwan0" >> /etc/dhcpcd.conf 
+sleep 1
+
 
 #echo "Setting raw-ip enable perms" 
 #chmod g+w /sys/class/net/wwan0/qmi/* 
