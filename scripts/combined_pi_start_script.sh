@@ -10,11 +10,13 @@ modem_check=$(lsusb | grep Qualcomm) #returns string if modem was identified
 
 if [ -z "$modem_check" ]; then #Checks if modem_check is 0/empty - i.e., no modem
         echo "A USB modem is not connected"  >> $HOME/logs/modem_diagnostics.log
+        sudo chronyc refresh #refresh stale sources on chrony
         $HOME/AeroLinux22/bin/pi_ftp_upload  >> $HOME/logs/modem_diagnostics.log
 
 else #Sees that modem_check has value and proceeds as modem is connected
         echo "A USB modem is connected" >> $HOME/logs/modem_diagnostics.log
         $HOME/AeroLinux22/scripts/GSM-Up  >> $HOME/logs/modem_diagnostics.log
+        sudo chronyc refresh #refresh all source resolves, on new network assumed. 
         $HOME/AeroLinux22/bin/pi_ftp_upload  >> $HOME/logs/modem_diagnostics.log
         $HOME/AeroLinux22/scripts/GSM-Down  >> $HOME/logs/modem_diagnostics.log
 fi
