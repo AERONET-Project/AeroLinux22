@@ -42,6 +42,9 @@ else
         #otherwise, figure out how to get relaunch of program to try resetting modem. 
         echo "not found on $i"
 fi
-SignalQuality 
+$HOME/AeroLinux22/scripts/SignalQuality 
+#tell chronyc we're online, refresh DNS records, then burst synch
+sudo chronyc online; sudo chronyc refresh; sudo chronyc burst 4/4
 echo "Link Active and Live"
 done
+

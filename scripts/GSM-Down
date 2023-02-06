@@ -9,4 +9,7 @@ sleep 2;
 sudo ifconfig wwan0 down;
 sleep 1; 
 #Switch modem mode into low power
-sudo qmicli -d /dev/ModemWDM --dms-set-operating-mode=low-power; 
+sudo qmicli -d /dev/ModemWDM --dms-set-operating-mode=low-power;
+#tell chronyc we're offline
+sudo chronyc offline 
+
