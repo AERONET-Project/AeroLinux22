@@ -94,8 +94,7 @@ sudo systemctl disable avahi-daemon
 sleep 1
 
 echo "adding PATH variables" 
-pathstore=$PATH
-if grep -q "$HOME/AeroLinux22/scripts" #checking if already in PATH
+if grep -q "$HOME/AeroLinux22/scripts" $PATH #checking if already in PATH
 	then #if it is, do nothing
 		echo "Wait, path already there"
 	else #if not, add it
