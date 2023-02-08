@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#stupid solution that really works to add PATH to crontab env 
+pathstore=$PATH
+if grep "$HOME/AeroLinux22/scripts" #checking if already in PATH
+then #if it is, do nothing
+else #if not, add it
+PATH="$HOME/AeroLinux22/scripts:$PATH"
+#echo 'PATH="$HOME/AeroLinux22/scripts:$PATH"' >> /home/$user_var/.bashrc 
+fi 
+
 echo "recompile programs"
 
 cd $HOME/AeroLinux22/source

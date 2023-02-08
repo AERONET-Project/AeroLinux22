@@ -94,7 +94,13 @@ sudo systemctl disable avahi-daemon
 sleep 1
 
 echo "adding PATH variables" 
-echo 'PATH="$HOME/AeroLinux22/scripts:$PATH"' >> /home/$user_var/.bashrc 
+pathstore=$PATH
+if grep "$HOME/AeroLinux22/scripts" #checking if already in PATH
+then #if it is, do nothing
+else #if not, add it
+PATH="$HOME/AeroLinux22/scripts:$PATH"
+#echo 'PATH="$HOME/AeroLinux22/scripts:$PATH"' >> /home/$user_var/.bashrc 
+fi 
 
 sleep 1
 echo "Setting NTP using chrony" 
