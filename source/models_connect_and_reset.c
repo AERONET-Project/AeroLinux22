@@ -35,8 +35,7 @@ Common variables
     char backup_dir[500], *homedir = getenv("HOME"), log_dir[200], log_file[200], message_text[1000], log_file2[200],
                           *username = getenv("LOGNAME");
     char file_nameh[400], file_named[400], file_namem[400];
-    char command[1000];
-    FILE *rd;
+
     int upload_switch, upload_switch_m, upload_switch_d, upload_switch_h, init_upload, if_daily_file_uploaded;
     struct stat bufff;
 
@@ -111,9 +110,7 @@ Step 0.  decide if local
             {
 
                 init_upload = 0;
-                output_message_to_log(log_file,"Connect 1\n");
                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
-                    output_message_to_log(log_file,"aMogus exit first error location\n");
                     exit(0);
             }
 
@@ -123,11 +120,7 @@ Step 0.  decide if local
 
     if (!if_local && (!init_upload))
     {
-        //kinda hacky method to call script correctly from full path programatically. 
-        sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                        rd=popen(command,"r");
-                        pclose(rd);
-                        
+        system("GSM-Down");
     }
 
     /*
@@ -270,23 +263,20 @@ start main loop
             if (log_day1 != log_day)
             {
                 if (!if_local)
-                { output_message_to_log(log_file,"Connect 2\n");
+                {
                     if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                     {
                         upload_daily_connection_log_to_ftp(log_file, username);
-                        output_message_to_log(log_file,"aMogus exit post-FTP\n");
-                    exit(0);
+                        exit(0);
                     }
                 }
                 find_and_upload_backup_files(log_day, backup_dir, log_file);
                 upload_daily_connection_log_to_ftp(log_file, username);
                 if (!if_local)
-                    sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                        rd=popen(command,"r");
+                    system("GSM-Down");
                 sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                         log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                 log_day = log_day1;
-                pclose(rd);
             }
 
             if (!mcport.if_T_port_already_open)
@@ -297,7 +287,6 @@ start main loop
                 {
                     sprintf(message_text, "No Serial - USB ports are detected\nProgram %s stop\n", argv[0]);
                     output_message_to_log(log_file, message_text);
-                    output_message_to_log(log_file,"aMogus exit no SERUSB\n");
                     exit(0);
                 }
                 strcpy(mcport.port_name, usb_port);
@@ -305,7 +294,6 @@ start main loop
                 if (!open_my_com_port(&mcport, _MODEL_T_, log_file))
                 {
                     output_message_to_log(log_file, "Port cannot be opened. Stop the program\n");
-                    output_message_to_log(log_file,"aMogus exit COM Port Fail\n");
                     exit(0);
                 }
 
@@ -324,8 +312,7 @@ start main loop
                     if (!open_my_com_port(&mcport, _MODEL_5_, log_file))
                     {
                         output_message_to_log(log_file, "Port cannot be opened. Stop the program\n");
-                        output_message_to_log(log_file,"aMogus exit V5 COM Port Fail \n");
-                    exit(0);
+                        exit(0);
                     }
                     V5_wait_for_new_packet(&mcport);
                     V5_init_port_receiption(&mcport);
@@ -345,10 +332,9 @@ start main loop
                     T_save_k8_buffer_on_disk(backup_dir, &k8bd);
 
                     if (!if_local)
-                    {output_message_to_log(log_file,"Connect 3\n");
+                    {
                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
-                            output_message_to_log(log_file,"aMogus exit generic error\n");
-                    exit(0);
+                            exit(0);
                     }
 
                     libcurl_upload_cimel_buffer_to_https(&k8bd, log_file, 1);
@@ -359,12 +345,10 @@ start main loop
                         output_message_to_log(log_file, "Will disconnect modem\n");
 
                         pc_time = time(NULL);
-                        sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                        rd=popen(command,"r");
+                        system("GSM-Down");
                         stop_time = time(NULL);
                         sprintf(message_text, "Modem disconnected after %d seconds\n", stop_time - pc_time);
                         output_message_to_log(log_file, message_text);
-                        pclose(rd);
                     }
 
                     free_cimel_buffer(&k8bh);
@@ -396,12 +380,11 @@ start main loop
                 if (log_day1 != log_day)
                 {
                     if (!if_local)
-                    {output_message_to_log(log_file,"Connect 4\n");
+                    {
                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                         {
                             upload_daily_connection_log_to_ftp(log_file, username);
-                            output_message_to_log(log_file,"aMogus exit post-daily FTP fail\n");
-                    exit(0);
+                            exit(0);
                         }
                     }
 
@@ -409,12 +392,10 @@ start main loop
                     upload_daily_connection_log_to_ftp(log_file, username);
 
                     if (!if_local)
-                        sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                        rd=popen(command,"r");
+                        system("GSM-Down");
                     sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                             log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                     log_day = log_day1;
-                    pclose(rd);
                 }
 
                 sprintf(message_text, "Will try to retreive K8 buffer %s", asctime(gmtime(&pc_time)));
@@ -463,10 +444,9 @@ start main loop
                 {
 
                     if (!if_local)
-                    { output_message_to_log(log_file,"Connect 5\n");
+                    {
                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
-                            output_message_to_log(log_file,"aMogus exit K8 Reset failure \n");
-                    exit(0);
+                            exit(0);
                     }
 
                     if (upload_switch_m == 2)
@@ -508,12 +488,10 @@ start main loop
                         output_message_to_log(log_file, "Will disconnect modem\n");
 
                         pc_time = time(NULL);
-                        sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                        rd=popen(command,"r");
+                        system("GSM-Down");
                         stop_time = time(NULL);
                         sprintf(message_text, "Modem disconnected after %d seconds\n", stop_time - pc_time);
                         output_message_to_log(log_file, message_text);
-                        pclose(rd);
                     }
                 }
 
@@ -564,12 +542,11 @@ start main loop
                         output_message_to_log(log_file, message_text);
 
                         if (!if_local)
-                        {output_message_to_log(log_file,"Connect 6\n");
+                        {
                             if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                             {
                                 upload_daily_connection_log_to_ftp(log_file, username);
-                                output_message_to_log(log_file,"aMogus exit uplink fail V5 Daily FTP\n");
-                    exit(0);
+                                exit(0);
                             }
                         }
 
@@ -586,12 +563,10 @@ start main loop
                             output_message_to_log(log_file, "Will disconnect modem\n");
 
                             pc_time = time(NULL);
-                            sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                            rd=popen(command,"r");
+                            system("GSM-Down");
                             stop_time = time(NULL);
                             sprintf(message_text, "Modem disconnected after %d seconds\n", stop_time - pc_time);
                             output_message_to_log(log_file, message_text);
-                            pclose(rd);
                         }
                         free_cimel_buffer(&k7bm);
                         free_cimel_buffer(&k7bh);
@@ -604,8 +579,7 @@ start main loop
                         if (!define_usb_com_port(usb_port, log_file))
                         {
                             output_message_to_log(log_file, "Port unavilable. Stop the program\n");
-                            output_message_to_log(log_file,"aMogus exit USB COM FAIL 2\n");
-                    exit(0);
+                            exit(0);
                         }
 
                         strcpy(mcport.port_name, usb_port);
@@ -613,8 +587,7 @@ start main loop
                         {
                             sprintf(message_text, "Port %s cannot be opened. Stop the program\n", usb_port);
                             output_message_to_log(log_file, message_text);
-                            output_message_to_log(log_file,"aMogus exit Port Busy fail \n");
-                    exit(0);
+                            exit(0);
                         }
 
                         V5_wait_for_new_packet(&mcport);
@@ -638,24 +611,21 @@ start main loop
                         if (log_day1 != log_day)
                         {
                             if (!if_local)
-                            {output_message_to_log(log_file,"Connect 7\n");
+                            {
                                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                 {
                                     upload_daily_connection_log_to_ftp(log_file, username);
-                                    output_message_to_log(log_file,"aMogus exit REDEF V5 Number FTP Fail \n");
-                    exit(0);
+                                    exit(0);
                                 }
                             }
                             find_and_upload_backup_files(log_day, backup_dir, log_file);
                             upload_daily_connection_log_to_ftp(log_file, username);
 
                             if (!if_local)
-                                sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                                rd=popen(command,"r");
+                                system("GSM-Down");
                             sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                                     log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                             log_day = log_day1;
-                            pclose(rd);
                         }
 
                         gmtime_r(&pc_time, &mtim);
@@ -678,11 +648,10 @@ start main loop
                         if (log_day1 != log_day)
                         {
                             if (!if_local)
-                            { output_message_to_log(log_file,"Connect 8\n");
+                            {
                                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                 {
                                     upload_daily_connection_log_to_ftp(log_file, username);
-                                    output_message_to_log(log_file,"aMogus exit DAILY FTP Fail \n");
                                     exit(0);
                                 }
                             }
@@ -690,12 +659,10 @@ start main loop
                             upload_daily_connection_log_to_ftp(log_file, username);
 
                             if (!if_local)
-                                sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                                rd=popen(command,"r");
+                                system("GSM-Down");
                             sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                                     log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                             log_day = log_day1;
-                            pclose(rd);
                         }
                         sprintf(message_text, "k7 buffer downloaded num = %d  %s", k7b.num_records, asctime(gmtime(&pc_time)));
                         output_message_to_log(log_file, message_text);
@@ -718,11 +685,10 @@ start main loop
                         if (log_day1 != log_day)
                         {
                             if (!if_local)
-                            {output_message_to_log(log_file,"Connect 9\n");
+                            {
                                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                 {
                                     upload_daily_connection_log_to_ftp(log_file, username);
-                                    output_message_to_log(log_file,"aMogus exit Daily FTP K7 fail \n");
                                     exit(0);
                                 }
                             }
@@ -731,12 +697,10 @@ start main loop
                             upload_daily_connection_log_to_ftp(log_file, username);
 
                             if (!if_local)
-                                sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                                rd=popen(command,"r");
+                                system("GSM-Down");
                             sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                                     log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                             log_day = log_day1;
-                            pclose(rd);
                         }
 
                         sprintf(message_text, "Interval reached system time %s", asctime(gmtime(&new_time)));
@@ -789,8 +753,7 @@ start main loop
                             if (!define_usb_com_port(usb_port, log_file))
                             {
                                 output_message_to_log(log_file, "Port unavilable. Stop the program\n");
-                                output_message_to_log(log_file,"aMogus exit K7 PORT Reopen fail \n");
-                    exit(0);
+                                exit(0);
                             }
 
                             strcpy(mcport.port_name, usb_port);
@@ -804,21 +767,17 @@ start main loop
                             {
                                 output_message_to_log(log_file, "Port cannot be opened. Stop the program\n");
                                 if (!if_local)
-                                {output_message_to_log(log_file,"Connect 10\n");
+                                {
                                     if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                     {
                                         upload_daily_connection_log_to_ftp(log_file, username);
-                                        output_message_to_log(log_file,"aMogus exit V5 to VT scan ");
-                                    exit(0);
+                                        exit(0);
                                     }
                                 }
                                 upload_daily_connection_log_to_ftp(log_file, username);
                                 if (!if_local)
-                                    sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                                    rd=popen(command,"r");
-                                    pclose(rd);
-                                    output_message_to_log(log_file,"   GSM Link Downed, this time\n");
-                    exit(0);
+                                    system("GSM-Down");
+                                exit(0);
                             }
                             if (T_receive_header_from_port(&mcport, &k8b, log_file))
                             {
@@ -838,12 +797,11 @@ start main loop
                                 if (log_day1 != log_day)
                                 {
                                     if (!if_local)
-                                    {output_message_to_log(log_file,"Connect 11\n");
+                                    {
                                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                         {
                                             upload_daily_connection_log_to_ftp(log_file, username);
-                                            output_message_to_log(log_file,"aMogus exit, vented\n");
-                    exit(0);
+                                            exit(0);
                                         }
                                     }
 
@@ -851,12 +809,10 @@ start main loop
                                     upload_daily_connection_log_to_ftp(log_file, username);
 
                                     if (!if_local)
-                                        sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                                        rd=popen(command,"r");
+                                        system("GSM-Down");
                                     sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                                             log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                                     log_day = log_day1;
-                                    pclose(rd);
                                 }
                                 sprintf(message_text, "No T instrument detected. Continue as model V5 %s", asctime(gmtime(&pc_time)));
                                 output_message_to_log(log_file, message_text);
@@ -867,21 +823,17 @@ start main loop
                                     sprintf(message_text, "Port %s cannot be opened. Stop the program\n", usb_port);
                                     output_message_to_log(log_file, message_text);
                                     if (!if_local)
-                                    {output_message_to_log(log_file,"Connect 12\n");
+                                    {
                                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                         {
                                             upload_daily_connection_log_to_ftp(log_file, username);
-                                            output_message_to_log(log_file,"aMogus exit");
-                    exit(0);
+                                            exit(0);
                                         }
                                     }
                                     upload_daily_connection_log_to_ftp(log_file, username);
                                     if (!if_local)
-                                        sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                                    rd=popen(command,"r");
-                                    pclose(rd);
-                                    output_message_to_log(log_file,"aMogus exit");
-                    exit(0);
+                                        system("GSM-Down");
+                                    exit(0);
                                 }
 
                                 V5_wait_for_new_packet(&mcport);
@@ -896,12 +848,11 @@ start main loop
                             close_my_port(&mcport);
 
                             if (!if_local)
-                            { output_message_to_log(log_file,"Connect 13\n");
+                            {
                                 if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                 {
                                     upload_daily_connection_log_to_ftp(log_file, username);
-                                    output_message_to_log(log_file,"aMogus exit");
-                    exit(0);
+                                    exit(0);
                                 }
                             }
 
@@ -934,12 +885,10 @@ start main loop
                                 output_message_to_log(log_file, "Will disconnect modem\n");
 
                                 pc_time = time(NULL);
-                                sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                                rd=popen(command,"r");
+                                system("GSM-Down");
                                 stop_time = time(NULL);
                                 sprintf(message_text, "Modem disconnected after %d seconds\n", stop_time - pc_time);
                                 output_message_to_log(log_file, message_text);
-                                pclose(rd);
                             }
 
                             sprintf(message_text, "Will try to reopen port %s\n", usb_port);
@@ -947,8 +896,7 @@ start main loop
                             if (!define_usb_com_port(usb_port, log_file))
                             {
                                 printf("Port unavilable. Stop the program\n");
-                                output_message_to_log(log_file,"aMogus exit");
-                    exit(0);
+                                exit(0);
                             }
 
                             strcpy(mcport.port_name, usb_port);
@@ -962,20 +910,16 @@ start main loop
                             {
                                 output_message_to_log(log_file, "Port cannot be opened. Stop the program\n");
                                 if (!if_local)
-                                { output_message_to_log(log_file,"Connect 14\n");
+                                {
                                     if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                     {
                                         upload_daily_connection_log_to_ftp(log_file, username);
-                                        output_message_to_log(log_file,"aMogus exit");
                                         exit(0);
                                     }
                                 }
                                 upload_daily_connection_log_to_ftp(log_file, username);
                                 if (!if_local)
-                                    sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                                    rd=popen(command,"r");
-                                    pclose(rd);
-                                output_message_to_log(log_file,"aMogus exit");
+                                    system("GSM-Down");
                                 exit(0);
                             }
                             if (T_receive_header_from_port(&mcport, &k8b, log_file))
@@ -987,11 +931,10 @@ start main loop
                                 if (log_day1 != log_day)
                                 {
                                     if (!if_local)
-                                    {output_message_to_log(log_file,"Connect 15\n");
+                                    {
                                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                         {
                                             upload_daily_connection_log_to_ftp(log_file, username);
-                                            output_message_to_log(log_file,"aMogus exit");
                                             exit(0);
                                         }
                                     }
@@ -1000,12 +943,10 @@ start main loop
                                     upload_daily_connection_log_to_ftp(log_file, username);
 
                                     if (!if_local)
-                                        sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                                        rd=popen(command,"r");
+                                        system("GSM-Down");
                                     sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                                             log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                                     log_day = log_day1;
-                                    pclose(rd);
                                 }
                                 cimel_model = _MODEL_T_;
                                 sprintf(message_text, "Detected T instrument %s", asctime(gmtime(&pc_time)));
@@ -1021,11 +962,10 @@ start main loop
                                 if (log_day1 != log_day)
                                 {
                                     if (!if_local)
-                                    {output_message_to_log(log_file,"Connect 16\n");
+                                    {
                                         if (!connect_hologram_model_and_reset_if_error(usb_reset_command, &reset_counter, log_file))
                                         {
                                             upload_daily_connection_log_to_ftp(log_file, username);
-                                            output_message_to_log(log_file,"aMogus exit");
                                             exit(0);
                                         }
                                     }
@@ -1034,13 +974,11 @@ start main loop
                                     upload_daily_connection_log_to_ftp(log_file, username);
 
                                     if (!if_local)
-                                        sprintf(command, "%s/AeroLinux22/scripts/GSM-Down 2>&1",homedir);
-                                        rd=popen(command,"r");
+                                        system("GSM-Down");
 
                                     sprintf(log_file, "%s/connection_log_%d_%02d_%02d.txt",
                                             log_dir, mtim.tm_year + 1900, mtim.tm_mon + 1, mtim.tm_mday);
                                     log_day = log_day1;
-                                    pclose(rd);
                                 }
                                 sprintf(message_text, "No T instrument detected. Continue as model V5 %s", asctime(gmtime(&pc_time)));
                                 output_message_to_log(log_file, message_text);
@@ -1049,7 +987,6 @@ start main loop
                                 {
                                     sprintf(message_text, "Port %s cannot be opened. Stop the program\n", usb_port);
                                     output_message_to_log(log_file, message_text);
-                                    output_message_to_log(log_file,"aMogus exit");
                                     exit(0);
                                 }
 
