@@ -95,7 +95,7 @@ sleep 1
 
 echo "adding PATH variables" 
 pathstore=$PATH
-if grep "$HOME/AeroLinux22/scripts" #checking if already in PATH
+if grep -q "$HOME/AeroLinux22/scripts" #checking if already in PATH
 then #if it is, do nothing
 else #if not, add it
 PATH="$HOME/AeroLinux22/scripts:$PATH"
