@@ -22,6 +22,8 @@ This software package enables Linux devices to transfer data from Cimel sun phot
  * Full verbosity of signal/modem diagnostics implemented via `CellSignalDiag -q` to output to terminal
  * Cellular signal diagnostics output to logger implemented via `CellSignalDiag`
  * Quick check of `SignalQuality` is implemented, simple dBm (switched to positive) and equivalent CSQ interpretation on output.
+ * Chrony online/offline synch step on network raise/sleep. 
+ * Conditional check for cron/user $PATH, if not present adds it, but if it is, doesn't. Fixes call for command paths not being present. 
  * Placeholder.tapestry
 
 #### Bug/ Issues/ To-Do List (Bugs Bolded and Italic)
