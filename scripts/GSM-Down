@@ -3,13 +3,17 @@
 #Written by Arsenio Menendez
 
 #Stop any existing network pipe
-sudo qmi-network /dev/ModemWDM stop; 
-sleep 2; 
+sudo qmi-network /dev/ModemWDM stop
+sleep 2
+# kill UDHCPC process running, do not want multiple stacking up.
+pid=$(pgrep udhcpc)
+sudo kill -9 pid
+sleep 1
 #Down the WWAN interface
-sudo ifconfig wwan0 down;
-sleep 1; 
+sudo ifconfig wwan0 down
+sleep 1
 #Switch modem mode into low power
-sudo qmicli -d /dev/ModemWDM --dms-set-operating-mode=low-power;
+sudo qmicli -d /dev/ModemWDM --dms-set-operating-mode=low-power
 #tell chronyc we're offline
-sudo chronyc offline 
+sudo chronyc offline
 
