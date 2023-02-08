@@ -7,7 +7,7 @@ sudo qmi-network /dev/ModemWDM stop
 sleep 2
 # kill UDHCPC process running, do not want multiple stacking up.
 pid=$(pgrep udhcpc)
-sudo kill -9 pid
+sudo kill -9 $pid
 sleep 1
 #Down the WWAN interface
 sudo ifconfig wwan0 down
