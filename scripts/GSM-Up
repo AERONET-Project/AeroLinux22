@@ -17,12 +17,12 @@ sleep 1
 sudo ifconfig wwan0 up
 sleep 1
 #Start up and connect the IP pipe
-sudo qmi-network /dev/ModemWDM start
+sudo qmi-network /dev/ModemWDM start 
 sleep 2
-#Handshake and get issued a DHCP address
-sudo udhcpc -i wwan0
+#Handshake and get issued a DHCP address (make 5 attempts, with 1 second delays between)
+sudo udhcpc -t 5 -T 1 -i wwan0
 #Need to implement verification of link before hand-off and exit of script. 
-sleep 5
+sleep 2
 #link verification stuff? 
 for i in {1..3}
 do
@@ -35,16 +35,22 @@ wget --no-check-certificate  -q  -O $FILENAME "https://aeronet.gsfc.nasa.gov/cgi
 if grep -q "$MYTIME" $FILENAME
 #Checks for matching time variable of unix timestamp in retrieved file
 then
-        #if it finds the heartbeat; great! 
+        #if it finds the heartbeat great! 
         echo "found heartbeat to NASA AERONET server"
+        $HOME/AeroLinux22/scripts/SignalQuality | tee  $HOME/AeroLinux22/scripts/pulse.out
+        #tell chronyc we're online, refresh DNS records, then burst synch
+        sudo chronyc online
+        tput setaf 10
+        echo "Link Active and Live at $MYTIME"  | tee $HOME/AeroLinux22/scripts/pulse.out
+        tput sgr0 
         break
 else
         #otherwise, figure out how to get relaunch of program to try resetting modem. 
-        echo "not found on $i"
+        echo "No heartbeat found, may be DNS or signal. Reset/retry automatic not yet implemented"
+        tput setaf 1
+        echo "LINK FAILURE"
+        tput sgr 0
 fi
-$HOME/AeroLinux22/scripts/SignalQuality | tee  $HOME/AeroLinux22/scripts/pulse.out
-#tell chronyc we're online, refresh DNS records, then burst synch
-sudo chronyc online
-echo "Link Active and Live at $MYTIME"  | tee $HOME/AeroLinux22/scripts/pulse.out
+
 done
 
