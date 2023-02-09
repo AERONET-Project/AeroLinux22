@@ -118,7 +118,12 @@ sleep 1
 #sleep 1
 
 echo "Adding cronjobs to user's crontab"
+#hacky way of prepending to crontab env variables. 
 crontab -r -u $user_var
+echo "PATH=/home/$user_var/AeroLinux22/scripts:/usr/local/bin:/usr/bin:/bin" > tmp.cron
+crontab tmp.cron 
+rm -r tmp.cron 
+
 cronjob1="@reboot sleep 60 && /home/$user_var/AeroLinux22/scripts/combined_pi_start_script.sh >> /home/$user_var/logs/connection.log"
 cronjob2="0 0 */2 * * /home/$user_var/AeroLinux22/scripts/k7_k8_check.sh"
 cronjob3="@reboot sleep 1 && /home/$user_var/AeroLinux22/scripts/ModemAutoset.sh" 
