@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #stupid solution that really works to add PATH to crontab env 
-pathstore=$PATH
-if grep -q "$HOME/AeroLinux22/scripts"  $pathstore #checking if already in PATH
-then #if it is, do nothing
-else #if not, add it
-PATH="$HOME/AeroLinux22/scripts:$PATH"
+if grep -q "$HOME/AeroLinux22/scripts"  $PATH #checking if already in PATH
+        then #if it is, do nothing
+                echo "Bingus bongus the PATH is already set"
+        else #if not, add it
+                PATH="$HOME/AeroLinux22/scripts:$PATH"
 #echo 'PATH="$HOME/AeroLinux22/scripts:$PATH"' >> /home/$user_var/.bashrc 
 fi 
 
