@@ -89,3 +89,4 @@ https://dayne.broderson.org/2020/03/12/the_time_is_now.html
 -Updated power manage to V4 with corrected pin assignments to match oshpark ups board v1.*
 -corrected polarity of power indicating LED in UPS schematic and PCB
 -added missing trace in in PCB layout, UPS trigger pin from ATtiny85
+-changed ATtiny C++ program to not set UPS trigger pin HIGH since it now has a pull up resistor 
