@@ -85,4 +85,7 @@ https://www.protoexpress.com/blog/how-to-create-a-schematic-and-symbol-library-k
 Incorporate time update per
 https://dayne.broderson.org/2020/03/12/the_time_is_now.html
 
-
+2/16/23
+-Updated power manage to V4 with corrected pin assignments to match oshpark ups board v1.*
+-corrected polarity of power indicating LED in UPS schematic and PCB
+-added missing trace in in PCB layout, UPS trigger pin from ATtiny85
