@@ -148,7 +148,7 @@ int define_usb_com_port(char *usb_port, char *log_file)
 }
 
 
-int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *reset_counter, char *log_file, int *mode)
+int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *reset_counter, char *log_file)
 {
     time_t pc_time, stop_time;
     FILE *rd;
@@ -206,10 +206,11 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     return 0;
 }
 
-
-void GSM-Link () {
+/*
+void GSMLink () {
 
 }
+*/
 
 size_t handle_aeronet_time_internally(unsigned char *buffer, size_t size, size_t nmemb, AERO_EXCHANGE *ptr)
 {
