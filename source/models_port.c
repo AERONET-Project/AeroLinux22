@@ -155,8 +155,9 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     char buffer[101], message_text[300];
     output_message_to_log(log_file, "Will activate modem\n");
     pc_time = time(NULL);
+    /*
     rd = popen("GSM-Up 2>&1", "r"); // redirect error output to stdout
-/*
+
     if (rd == NULL)
     {
         output_message_to_log(log_file, "Unable to open process\n"); // if popen does not work, terminate program
