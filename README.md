@@ -29,7 +29,7 @@ This software package enables Linux devices to transfer data from Cimel sun phot
 #### Bug/ Issues/ To-Do List (Bugs Bolded and Italic)
  *  ***0Byte sessions of 12 hour, likely narrowed down to issues with completing handshake with tower based on "stale" information in modem, needs a reset and reassociate***
  *  ~~***PPP DNS failures on clean image build using Hologram chatscripts (Yet indeterminate)***~~ PPPD removed, now on QMI
- *  ***QMI `GSM-Up` called from within .c program has DNS failures consistently, not sure what happening here, need to implement popen and deterministic check for error
+ *  ***QMI `GSM-Up` called from within .c program has DNS failures consistently, not sure what happening here, need to implement popen and deterministic check for error***
  *  ~~Switching the modem status check to actually read the modem state back over serial and then determine actions, culminating in obsoleting of the USB subsystem reset and driver unbind reset mode (does not appear to work).~~(Implemented and working great!)
  *  Power loss causes corruption of SD card, need to implement graceful shutdown and power watchdog to reset pi on power return unless pi asserting boot 
  *  Design and build of a supercapacitor based UPS to carry over operation long enough to graceful shutdown 
