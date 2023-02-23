@@ -102,7 +102,7 @@ if grep -q "$HOME/AeroLinux22/scripts" $PATH #checking if already in PATH
 
 fi 
 
-//echo "$HOME/AeroLinux22/scripts/GSM-Up" >> /home/$user_var/.bashrc 
+#echo "$HOME/AeroLinux22/scripts/GSM-Up" >> /home/$user_var/.bashrc 
 
 sleep 1
 echo "Setting NTP using chrony" 
