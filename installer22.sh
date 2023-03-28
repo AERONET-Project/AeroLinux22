@@ -70,6 +70,9 @@ mv ModemSleep.service /etc/systemd/system/
 systemctl enable ModemSleep.service
 chmod g+w /home/$user_var/AeroLinux22/scripts/*
 
+mv motd /etc/motd #should move login display to proper location 
+mv wwan0 /etc/network/interfaces.d/wwan0 #auto trigger should work? dunno yet. 
+
 echo "Setup of network start/stop symlinks"
 chmod +x /home/$user_var/AeroLinux22/scripts/GSM-Up 
 chmod +x /home/$user_var/AeroLinux22/scripts/GSM-Down 
@@ -106,18 +109,20 @@ fi
 
 sleep 1
 echo "Setting NTP using chrony" 
-chronyc makestep 
-
+chronyc refresh #de-stale sources
+chronyc makestep #force step 
 
 sleep 1 
 echo "disabling DCHPCD ON WWAN0"
 echo "denyinterfaces wwan0" >> /etc/dhcpcd.conf 
 sleep 1
 
+echo "Setting raw-ip enable perms" 
+chmod g+w /sys/class/net/wwan0/qmi/* 
+sleep 1
 
-#echo "Setting raw-ip enable perms" 
-#chmod g+w /sys/class/net/wwan0/qmi/* 
-#sleep 1
+echo "APN=hologram" >/etc/qmi-network.conf 
+#testing this variant, may or may not work
 
 echo "Adding cronjobs to user's crontab"
 #hacky way of prepending to crontab env variables. 
@@ -125,6 +130,9 @@ crontab -r -u $user_var
 echo "PATH=/home/$user_var/AeroLinux22/scripts:/usr/local/bin:/usr/bin:/bin" > tmp.cron
 crontab tmp.cron 
 rm -r tmp.cron 
+#this may not work, check for retry Need to debug what is going wrong here. 
+#path appending may not be the best move, look into NetworkManager dispatcher Pre-up through up and then pre-down and down. 
+#that executes scripts in the /etc/usr/lib/NetworkManager/dispatcher.d in alphabetical order. DXWRX for root. 
 
 cronjob1="@reboot sleep 60 && /home/$user_var/AeroLinux22/scripts/combined_pi_start_script.sh >> /home/$user_var/logs/connection.log"
 cronjob2="0 0 */2 * * /home/$user_var/AeroLinux22/scripts/k7_k8_check.sh"
