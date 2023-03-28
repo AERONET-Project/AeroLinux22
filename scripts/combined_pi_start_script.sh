@@ -4,9 +4,10 @@
 pathcheck=$(env | grep "$HOME/AeroLinux22/scripts")
 if [ -z "$pathcheck" ]; #checking if already in PATH
         then #if it is, do nothing
-                PATH="$HOME/AeroLinux22/scripts:$PATH"
-        else #if not, add it
                 echo "Bingus bongus the PATH is already set"
+        else #if not, add it
+                PATH="$HOME/AeroLinux22/scripts:$PATH" 
+                #Not sure why this was pushed reversed, should have been the other way around, would continually error in any configuration as-is        
 #echo 'PATH="$HOME/AeroLinux22/scripts:$PATH"' >> /home/$user_var/.bashrc 
 fi 
 
@@ -18,7 +19,8 @@ cc -o ../bin/pi_ftp_upload pi_ftp_upload.c models_port.c -lm -lcurl
 
 modem_check=$(lsusb | grep Qualcomm) #returns string if modem was identified
 
-if [ -z "$modem_check" ]; then #Checks if modem_check is 0/empty - i.e., no modem
+if [ -z "$modem_check" ] 
+        then #Checks if modem_check is 0/empty - i.e., no modem
         echo "A USB modem is not connected"  >> $HOME/logs/modem_diagnostics.log
         sudo chronyc refresh #refresh stale sources on chrony
         $HOME/AeroLinux22/bin/pi_ftp_upload  >> $HOME/logs/modem_diagnostics.log
