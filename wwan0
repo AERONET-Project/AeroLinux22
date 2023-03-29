@@ -3,6 +3,7 @@ iface wwan0 inet manual
 #before wwan0 comes up run these
 pre-up ifconfig wwan0 down
 #shut down interface
+#test the modemCOM port 10 times (break out if checks out early)
 pre-up for _ in $(seq 1 10); do /usr/bin/test -c /dev/ModemCOM && break; /bin/sleep 1; done 
 #flip modem into raw IP then online mode 
 echo Y ? /sys/class/net/wwan0/qmi/raw-ip 
@@ -10,7 +11,6 @@ pre-up /usr/bin/qmicli -d /dev/ModemWDM --set-expected-data-format=raw-ip
 pre-up /usr/bin/qmicli -d /dev/ModemWDM --dms-set-operating-mode=online
 # may not need 
 #pre-up ifconfig wwan0 up
-#test the modemCOM port 10 times
 pre-up for _ in $(seq 1 10); do /usr/bin/qmicli -d /dev/ModemWDM --nas-get-signal-strength && break; /bin/sleep 1; done 
 #test for signal strength after getting lock on modemCOM
 pre-up /usr/local/bin/qmi-network-raw /dev/ModemWDM start 
@@ -18,7 +18,7 @@ pre-up /usr/local/bin/qmi-network-raw /dev/ModemWDM start
 pre-up udhcpc -i wwan0 
 #get that DHCPC address 
 post-down /usr/local/bin/qmi-network-raw /dev/ModemWDM stop 
-#after bringing down the interface, shut down the network. 
+#after bringing down the interface, shut down the network then sleep the modem. 
 post-down /usr/bin/qmicli -d /dev/ModemWDM --dms-set-operating-mode=low-power
 #TODO post validation testing, get this to kill the udhcpc child process post shutdown
 #also setting flags for the chronyc to be set into offline mode when downed and online after upped
