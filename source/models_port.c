@@ -155,6 +155,8 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     char buffer[101], message_text[300];
     output_message_to_log(log_file, "Will activate modem\n");
     pc_time = time(NULL);
+
+    system("ifup wwan0");
     /*
     rd = popen("GSM-Up 2>&1", "r"); // redirect error output to stdout
 
@@ -166,7 +168,7 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
 
     fgets(buffer, 100, rd);
     pclose(rd);
-*/
+
     if (!strstr(buffer, "ERROR"))
     {
         stop_time = time(NULL);
@@ -179,7 +181,7 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     output_message_to_log(log_file, message_text);
     system(usb_reset_command);
     *reset_counter = *reset_counter + 1;
-/*
+
     rd = popen("GSM-Up 2>&1", "r"); // redirect error output to stdout
 
     if (rd == NULL)
