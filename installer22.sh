@@ -97,14 +97,20 @@ sudo systemctl disable avahi-daemon
 sleep 1
 
 echo "adding PATH variables" 
-if grep -q "$HOME/AeroLinux22/scripts" $PATH #checking if already in PATH
-	then #if it is, do nothing
-		echo "Wait, path already there"
-	else #if not, add it
-		PATH="$HOME/AeroLinux22/scripts:$PATH"
-
+pathcheck=$(echo $PATH | grep "$HOME/AeroLinux22/scripts")
+if [ -z "$pathcheck" ]; #checking if already in PATH
+        then #if it is, do nothing
+                echo "Bingus bongus the PATH is already set"
+				export PATH
+        else #if not, add it
+                PATH="$HOME/AeroLinux22/scripts:$PATH" 
+				export PATH
+                #Not sure why this was pushed reversed, should have been the other way around, would continually error in any configuration as-is        
+#echo 'PATH="$HOME/AeroLinux22/scripts:$PATH"' >> /home/$user_var/.bashrc 
 fi 
 
+
+#brute force trigger to raise interface on every boot. (try to avoid)
 #echo "$HOME/AeroLinux22/scripts/GSM-Up" >> /home/$user_var/.bashrc 
 
 sleep 1
@@ -121,8 +127,7 @@ echo "Setting raw-ip enable perms"
 chmod g+w /sys/class/net/wwan0/qmi/* 
 sleep 1
 
-echo "APN=hologram" >/etc/qmi-network.conf 
-#testing this variant, may or may not work
+
 
 echo "Adding cronjobs to user's crontab"
 #hacky way of prepending to crontab env variables. 

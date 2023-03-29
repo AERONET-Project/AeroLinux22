@@ -1,12 +1,14 @@
 #!/bin/bash
 
 #stupid solution that really works to add PATH to crontab env
-pathcheck=$(env | grep "$HOME/AeroLinux22/scripts")
+pathcheck=$(echo $PATH | grep "$HOME/AeroLinux22/scripts")
 if [ -z "$pathcheck" ]; #checking if already in PATH
         then #if it is, do nothing
                 echo "Bingus bongus the PATH is already set"
+				export PATH
         else #if not, add it
                 PATH="$HOME/AeroLinux22/scripts:$PATH" 
+				export PATH
                 #Not sure why this was pushed reversed, should have been the other way around, would continually error in any configuration as-is        
 #echo 'PATH="$HOME/AeroLinux22/scripts:$PATH"' >> /home/$user_var/.bashrc 
 fi 
@@ -30,7 +32,7 @@ else #Sees that modem_check has value and proceeds as modem is connected
         $HOME/AeroLinux22/scripts/GSM-Up  >> $HOME/logs/modem_diagnostics.log
         sudo chronyc refresh #refresh all source resolves, on new network assumed. 
         $HOME/AeroLinux22/bin/pi_ftp_upload  >> $HOME/logs/modem_diagnostics.log
-        #$HOME/AeroLinux22/scripts/GSM-Down  >> $HOME/logs/modem_diagnostics.log
+        $HOME/AeroLinux22/scripts/GSM-Down  >> $HOME/logs/modem_diagnostics.log
 fi
 
 

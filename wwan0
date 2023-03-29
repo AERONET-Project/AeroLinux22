@@ -13,11 +13,11 @@ pre-up /usr/bin/qmicli -d /dev/ModemWDM --dms-set-operating-mode=online
 #pre-up ifconfig wwan0 up
 pre-up for _ in $(seq 1 10); do /usr/bin/qmicli -d /dev/ModemWDM --nas-get-signal-strength && break; /bin/sleep 1; done 
 #test for signal strength after getting lock on modemCOM
-pre-up /usr/local/bin/qmi-network-raw /dev/ModemWDM start 
+pre-up /usr/bin/qmi-network /dev/ModemWDM start 
 #fire up that there interface 
 pre-up udhcpc -i wwan0 
 #get that DHCPC address 
-post-down /usr/local/bin/qmi-network-raw /dev/ModemWDM stop 
+post-down /usr/bin/qmi-network /dev/ModemWDM stop 
 #after bringing down the interface, shut down the network then sleep the modem. 
 post-down /usr/bin/qmicli -d /dev/ModemWDM --dms-set-operating-mode=low-power
 #TODO post validation testing, get this to kill the udhcpc child process post shutdown
