@@ -157,6 +157,7 @@ int connect_hologram_model_and_reset_if_error(char *usb_reset_command, int *rese
     pc_time = time(NULL);
 
     system("ifup wwan0");
+    system("touch /help.lol");
     /*
     rd = popen("GSM-Up 2>&1", "r"); // redirect error output to stdout
 
