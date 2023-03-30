@@ -67,7 +67,11 @@ def checkAndLogExtBatt():
         # Read all the ADC channel values in a list.
         #values = [0]*4
         #read ADC channel 1
-        adcReading= adc.read_adc(1, gain=GAIN)
+
+        try:
+            adcReading= adc.read_adc(1, gain=GAIN)
+        except OSError:
+            print("ERROR: Coupd not connect to Voltage monitoring ADC")
         
         battVolt=ADCmapping(adcReading)
         now=datetime.datetime.now()
