@@ -16,8 +16,8 @@ batt_check_interval=600#external battery will be checekd every (600 seconds) 10m
 os.system('''sudo date -s "$(curl -s --head http://google.com | grep ^Date: | sed 's/Date: //g')"''')
 
 #open External battery coltage log
-f= open("/home/test_6/UPS/Ext_Batt_Voltage_Log.txt", "a")
-fi=open("/home/test_6/UPS/UPS_log.txt", "a")
+f= open("/home/test_6/AeroLinux22/UPS_Resource/Ext_Batt_Voltage_Log.txt", "a")
+fi=open("/home/test_6/AeroLinux22/UPS_Resource/UPS_log.txt", "a")
 # Create an ADS1115 ADC (16-bit) instance.
 adc = Adafruit_ADS1x15.ADS1115()
 
@@ -87,7 +87,7 @@ def readInputFile():
     global lipo_shutdown
     global ext_shutdown
     global ext_threshold
-    fil= open("/home/test_6/UPS/AEROLINUX_UPS_CONFIG.txt", "r")
+    fil= open("/home/test_6/AeroLinux22/UPS_Resource/AEROLINUX_UPS_CONFIG.txt", "r")
     #print("input file read")
 
 
