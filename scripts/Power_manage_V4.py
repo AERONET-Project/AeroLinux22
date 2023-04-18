@@ -56,6 +56,7 @@ socH=bus.read_byte_data(addr,0x05)
 socL=bus.read_byte_data(addr,0x06)
 lipo_shutdown = True
 lipo_threshold =float(50.0)
+ext_monitor=False
 ext_shutdown = False
 ext_threshold =11.0
 
@@ -117,6 +118,17 @@ def readInputFile():
 
     #read and ignore empty line
     s=fil.readline()
+    
+    #get ext battery monitoring bool
+    s=fil.readline()
+    l=s.split(':')
+    l[1]=l[1].strip()
+    if l[1].lower()=="false":
+        ext_monitor= False
+    else:
+        ext_monitor=True
+    print("Monitor External Battery:" + str(ext_monitor))
+    
     #get ext batt bool
     s=fil.readline()
     l=s.split(':')
@@ -127,6 +139,7 @@ def readInputFile():
         ext_shutdown=True
 
 
+    
     print("External battery Shutdown:" + str(ext_shutdown))
     s=fil.readline()
     l=s.split(':')
