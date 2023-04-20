@@ -238,7 +238,7 @@ while 1:
             pass
     now=time.time()
     elapsed=now-start
-    elapsed= round(elapsed,0)
+    elapsed= round(elapsed,-1) # round to the nearest multiple of 10
     #print (elapsed)
     trigger=bool(elapsed%batt_check_interval)# will return 0 aka False when elapsed time is divisible by the time intervale ie once every interval
     
@@ -247,6 +247,6 @@ while 1:
     if not trigger:
         checkAndLogExtBatt()    
         print("checking battery")
-    time.sleep(5)
+    time.sleep(10)
 
 
