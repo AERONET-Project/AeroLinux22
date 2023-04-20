@@ -43,7 +43,7 @@ def readInputFile():
     if l[1].lower()=="false":
         lipo_shutdown= False
     else:
-        lipo_shutdwon=True
+        lipo_shutdown=True
 
     print("LiPo Shutdown:" + str(lipo_shutdown))
 
