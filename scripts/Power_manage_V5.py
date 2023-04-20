@@ -94,7 +94,7 @@ def readInputFile():
 readInputFile()
 
 start=time.time()
-batt_check_interval=600#external battery will be checekd every (600 seconds) 10min
+batt_check_interval=30#external battery will be checekd every (600 seconds) 10min
 
 
 #open UPS log
@@ -172,7 +172,7 @@ def checkAndLogExtBatt():
             f.write(entry)
             f.flush()
         except OSError:
-            print("ERROR: Coupd not connect to Voltage monitoring ADC")
+            print("ERROR: Could not connect to Voltage monitoring ADC")
         
         
 
