@@ -25,6 +25,7 @@ def readInputFile():
     global lipo_threshold
     global lipo_shutdown
     global ext_shutdown
+    global ext_monitor
     global ext_threshold
     fil= open("/home/test_6/AeroLinux22/UPS_Resource/AEROLINUX_UPS_CONFIG.txt", "r")
     #print("input file read")
@@ -244,7 +245,7 @@ while 1:
     
     #time.sleep(1)#print(trigger)
     print(elapsed)
-    if not trigger:
+    if ext_monitor and not trigger:
         checkAndLogExtBatt()    
         print("checking battery")
     time.sleep(10)
