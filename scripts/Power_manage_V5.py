@@ -94,7 +94,7 @@ def readInputFile():
 readInputFile()
 
 start=time.time()
-batt_check_interval=30#external battery will be checekd every (600 seconds) 10min
+batt_check_interval=30 #external battery will be checekd every (600 seconds) 10min
 
 
 #open UPS log
@@ -243,8 +243,10 @@ while 1:
     trigger=bool(elapsed%batt_check_interval)# will return 0 aka False when elapsed time is divisible by the time intervale ie once every interval
     
     #time.sleep(1)#print(trigger)
+    print(elapsed)
     if not trigger:
-        checkAndLogExtBatt()        
+        checkAndLogExtBatt()    
+        print("checking battery")
     time.sleep(5)
 
 
