@@ -13,6 +13,13 @@ time.sleep(3)
 # update system time through HTTP port with google.com since NTP port is blocked on many campus networks
 os.system('''sudo date -s "$(curl -s --head http://google.com | grep ^Date: | sed 's/Date: //g')"''')
 
+#ext_monitor=False
+global lipo_threshold
+global lipo_shutdown
+global ext_monitor
+global ext_shutdown
+global ext_threshold
+
 def readInputFile():
         
     global lipo_threshold
@@ -141,11 +148,11 @@ vcellL=bus.read_byte_data(addr,0x04)
 socH=bus.read_byte_data(addr,0x05)
 socL=bus.read_byte_data(addr,0x06)
 
-lipo_shutdown = True
-lipo_threshold =float(50.0)
-ext_monitor=False
-ext_shutdown = False
-ext_threshold =11.0
+#lipo_shutdown = True
+#lipo_threshold =float(50.0)
+#ext_monitor=False
+#ext_shutdown = False
+#ext_threshold =11.0
 
 def ADCmapping(adcReading):
      battVolt=(((adcReading-adcMin)*battRange)/adcRange)+battMin
