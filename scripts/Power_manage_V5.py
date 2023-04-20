@@ -35,7 +35,7 @@ def readInputFile():
     #read and ignore empty line
     s=fil.readline()
 
-
+#comment
     #get lipo boolean
     s=fil.readline()
     l=s.split(':')
