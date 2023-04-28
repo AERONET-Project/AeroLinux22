@@ -14,14 +14,16 @@ time.sleep(3)
 os.system('''sudo date -s "$(curl -s --head http://google.com | grep ^Date: | sed 's/Date: //g')"''')
 
 #ext_monitor=False
+global userName
 global lipo_threshold
 global lipo_shutdown
 global ext_monitor
 global ext_shutdown
 global ext_threshold
 
+
 def readInputFile():
-        
+    global userName    
     global lipo_threshold
     global lipo_shutdown
     global ext_shutdown
@@ -33,6 +35,16 @@ def readInputFile():
 
     # read and ignore file header
     s=fil.readline()
+    #read and ignore empty line
+    s=fil.readline()
+    
+    #get Username
+    s=fil.readline()
+    l=s.split(':')
+    l[1]=l[1].strip()
+    userName=l[1]
+    print(userName)
+    
     #read and ignore empty line
     s=fil.readline()
 
@@ -244,10 +256,10 @@ while 1:
     trigger=bool(elapsed%batt_check_interval)# will return 0 aka False when elapsed time is divisible by the time intervale ie once every interval
     
     #time.sleep(1)#print(trigger)
-    print(elapsed)
+    #print(elapsed)
     if ext_monitor and not trigger:
         checkAndLogExtBatt()    
-        print("checking battery")
+        #print("checking battery")
     time.sleep(10)
 
 
