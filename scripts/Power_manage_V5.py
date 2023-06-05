@@ -141,7 +141,7 @@ USBpowerStatus=5
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(power_btn, GPIO.IN, pull_up_down=GPIO.PUD_UP) #power btn
-GPIO.setup(power_LED, GPIO.OUT, initial=GPIO.HIGH) #for power indication LED
+GPIO.setup(power_LED, GPIO.OUT, initial=GPIO.LOW) #for power indication LED
 GPIO.setup(piOnStatus,GPIO.OUT, initial=GPIO.HIGH)# set this pin high so ATtiny watchdog knows pi is powered on
 GPIO.setup(USBpowerStatus, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)#to read if USB power cable is connected and had power coming in
 
