@@ -1,11 +1,21 @@
 <img align="right" width="100" height="100" src="https://www.x20.org/wp-content/uploads/2015/01/NASA-logo.png"><br/>
 
 # AeroLinux Gen 2
+## Recommend looking in Development branch as that is most up-to date but not Stable. 
 
 This software package enables Linux devices to transfer data from Cimel sun photometers via Ethernet, Wi-Fi or a Hologram Nova cellular modem.
 #### Version 1.1.1 ####
  * On boot, sends a network settings message to our server via FTP
  * Watch runs on a 26 hour basis now
+
+### BRANCHES
+| Branch | Descriptions | 
+| ------------- | ------------------------------------------------------- |
+| [Main](https://github.com/AERONET-Project/AeroLinux22/tree/main) | Stable version for Ethernet | 
+ [**Development**](https://github.com/AERONET-Project/AeroLinux22/tree/Development) | Intensive deep dive bugfixing and programming to modernize and streamline AEROLinux22 program |
+| [Dev 2](https://github.com/AERONET-Project/AeroLinux22/tree/Dev2) | Continuing to mess with permissions and modifications to try nailing down 0B sessions, derived from Development after it was in testing stable state |
+| [UPS_Watchdog](https://github.com/AERONET-Project/AeroLinux22/tree/UPS_Watchdog) | UPS watchdog development | 
+| [UPS](https://github.com/AERONET-Project/AeroLinux22/tree/UPS) | UPS interface for lithium backup | 
 
 ## Appendix
 
